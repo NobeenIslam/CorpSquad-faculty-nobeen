@@ -1,21 +1,19 @@
 import { useEffect, useState } from "react";
 import { ProjectInterface } from "../utils/Interfaces";
 
-export function ProjectCard(): JSX.Element {
-  const [projects, setProjects] = useState<ProjectInterface[]>([]);
+interface ProjectCardProps {
+  project: ProjectInterface;
+}
 
-  async function fetchProjects() {
-    const response = await fetch(
-      "https://consulting-projects.academy-faculty.repl.co/api/projects"
-    );
-    const jsonBody: ProjectInterface[] = await response.json();
-    setProjects(jsonBody);
-  }
-
-  useEffect(() => {
-    fetchProjects();
-  }, []);
-
-  console.log(projects);
-  return <div>{JSON.stringify(projects[1])}</div>;
+export function ProjectCard({ project }: ProjectCardProps): JSX.Element {
+  return (
+    <section>
+      <h2>{project.id}</h2>
+      <div>Start-Date:{project.contract.startDate}</div>
+      <div>End-Date:{project.contract.endDate}</div>
+      <div>clientId:{project.clientId}</div>
+      <div>Revenue: {project.contract.size}</div>
+      <div>Employees: {project.employeeIds}</div>
+    </section>
+  );
 }
