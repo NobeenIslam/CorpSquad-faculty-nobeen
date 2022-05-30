@@ -10,3 +10,15 @@ export interface ContractInterface {
   endDate: string;
   size: number;
 }
+
+export interface EmployeeInterface {
+  id: string;
+  name: string;
+  role: string;
+  avatar: string;
+}
+
+export interface ClientInterface {
+  id: string;
+  name: string;
+}
