@@ -25,7 +25,7 @@ export interface ProjectInterfaceWithAllData {
 export interface ContractInterface {
   startDate: string;
   endDate: string;
-  size: number;
+  size: string;
 }
 
 export interface EmployeeInterface {
