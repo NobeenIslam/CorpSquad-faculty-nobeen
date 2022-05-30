@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import { addClientNameToProjects } from "../utils/addClientNameToProjects";
+import { addEmployeeInfoToProjects } from "../utils/addEmployeeInfoToProjects";
 import {
   ClientInterface,
   EmployeeInterface,
@@ -46,23 +47,7 @@ export function Dashboard(): JSX.Element {
 
     // Take each project and return an object with all key/values of project + name from clients based on the Ids matching
     const projectsWithClientNames: ProjectInterfaceWithClientName[] = addClientNameToProjects(projects,clients)
-;
-
-    const projectsWithAllInfo: ProjectInterfaceWithAllData[] =
-      projectsWithClientNames.map((project) => {
-        const employeesForThisProject = project.employeeIds.map((id) => {
-          //For each employee id in the project get his/her full data by searching through employees
-          const fullEmployeeData = employees.find(
-            (employee) => id === employee.id
-          );
-          if (fullEmployeeData === undefined) {
-            return "Employee not found";
-          } else {
-            return fullEmployeeData;
-          }
-        });
-        return { ...project, employees: employeesForThisProject };
-      });
+    const projectsWithAllInfo: ProjectInterfaceWithAllData[] = addEmployeeInfoToProjects(projectsWithClientNames, employees)
 
     setFullResource(projectsWithAllInfo)
   }, []);

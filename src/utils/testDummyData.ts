@@ -1,3 +1,8 @@
+import {
+  ProjectInterfaceWithAllData,
+  ProjectInterfaceWithClientName,
+} from "./Interfaces";
+
 export const testProjects = [
   {
     id: "f0b83d3a0b77da97ec7eefc4",
@@ -51,8 +56,16 @@ const client2 = {
 
 export const testClients = [client1, client2];
 
+export const testResult1: ProjectInterfaceWithClientName[] = [
+  { ...testProjects[0], clientName: "Murray, Corwin and Mante" },
+  { ...testProjects[1], clientName: "Will - Lehner" },
+];
 
-export const testResult1 = [
-  {...testProjects[0], clientName: "Murray, Corwin and Mante"},
-  {...testProjects[1], clientName: "Will - Lehner"}
-]
+export const testResult2: ProjectInterfaceWithAllData[] = [
+  {
+    ...testProjects[0],
+    clientName: "Murray, Corwin and Mante",
+    employees: testEmployees,
+  },
+  { ...testProjects[1], clientName: "Will - Lehner", employees: testEmployees },
+];
