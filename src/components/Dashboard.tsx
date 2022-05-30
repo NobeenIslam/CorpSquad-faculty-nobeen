@@ -56,13 +56,13 @@ export function Dashboard(): JSX.Element {
       addEmployeeInfoToProjects(projectsWithClientNames, employees);
 
     setFullResource(projectsWithAllInfo);
+    //Disabling as it is saying to put clients,projects and employees in which would cause an infinite loop
+    //eslint-disable-next-line
   }, []);
 
-  console.log("This is full resource", fullResource);
   return (
     <>
-      <div>Hello</div>
-      {/* <ProjectCard project={projects[1]} /> */}
+      <ProjectCard project={projects[1]} />
     </>
   );
 }
