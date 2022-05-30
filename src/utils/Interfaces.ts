@@ -5,6 +5,23 @@ export interface ProjectInterface {
   contract: ContractInterface;
 }
 
+export interface ProjectInterfaceWithClientName {
+  id: string;
+  clientId: string;
+  clientName: string;
+  employeeIds: string[];
+  contract: ContractInterface;
+}
+
+export interface ProjectInterfaceWithAllData {
+  employees: ("Employee not found" | EmployeeInterface)[];
+  id: string;
+  clientId: string;
+  clientName: string;
+  employeeIds: string[];
+  contract: ContractInterface;
+}
+
 export interface ContractInterface {
   startDate: string;
   endDate: string;
