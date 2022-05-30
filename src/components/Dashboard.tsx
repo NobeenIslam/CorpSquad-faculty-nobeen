@@ -1,11 +1,18 @@
 import { useEffect, useState } from "react";
-import { ClientInterface, EmployeeInterface, ProjectInterface } from "../utils/Interfaces";
+import {
+  ClientInterface,
+  EmployeeInterface,
+  ProjectInterface,
+  ProjectInterfaceWithAllData,
+  ProjectInterfaceWithClientName,
+} from "../utils/Interfaces";
 import { ProjectCard } from "./ProjectCard";
 
 export function Dashboard(): JSX.Element {
   const [projects, setProjects] = useState<ProjectInterface[]>([]);
   const [clients, setClients] = useState<ClientInterface[]>([]);
   const [employees, setEmployees] = useState<EmployeeInterface[]>([]);
+  const [fullResource,setFullResource] = useState<ProjectInterfaceWithAllData[]>([])
 
   async function fetchProjects() {
     const response = await fetch(
@@ -27,20 +34,52 @@ export function Dashboard(): JSX.Element {
     const response = await fetch(
       "https://consulting-projects.academy-faculty.repl.co/api/employees"
     );
-    const employeesJSON: ClientInterface[] = await response.json();
-    setClients(employeesJSON);
+    const employeesJSON: EmployeeInterface[] = await response.json();
+    setEmployees(employeesJSON);
   }
 
   useEffect(() => {
     fetchProjects();
     fetchClients();
     fetchEmployees();
-  }, []);
 
+    // Take each project and return an object with all key/values of project + name from clients based on the Ids matching
+    const projectsWithClientNames: ProjectInterfaceWithClientName[] =
+      projects.map((project) => {
+        const thisProjectsClient = clients.find(
+          (client) => client.id === project.clientId
+        );
+        if (thisProjectsClient === undefined) {
+          return { ...project, clientName: "Client not found" };
+        } else {
+          return { ...project, clientName: thisProjectsClient.name };
+        }
+      });
+
+    const projectsWithAllInfo: ProjectInterfaceWithAllData[] =
+      projectsWithClientNames.map((project) => {
+        const employeesForThisProject = project.employeeIds.map((id) => {
+          //For each employee id in the project get his/her full data by searching through employees
+          const fullEmployeeData = employees.find(
+            (employee) => id === employee.id
+          );
+          if (fullEmployeeData === undefined) {
+            return "Employee not found";
+          } else {
+            return fullEmployeeData;
+          }
+        });
+        return { ...project, employees: employeesForThisProject };
+      });
+
+    setFullResource(projectsWithAllInfo)
+  }, []);
+  console.log("")
+  console.log("This is full resource", fullResource)
   return (
     <>
-      <div>{JSON.stringify(projects[1])}</div>
-      <ProjectCard project={projects[1]} />
+      <div>Hello</div>
+      {/* <ProjectCard project={projects[1]} /> */}
     </>
   );
 }
