@@ -14,8 +14,11 @@ export function Dashboard(): JSX.Element {
   const [projects, setProjects] = useState<ProjectInterface[]>([]);
   const [clients, setClients] = useState<ClientInterface[]>([]);
   const [employees, setEmployees] = useState<EmployeeInterface[]>([]);
-  const [fullResource,setFullResource] = useState<ProjectInterfaceWithAllData[]>([])
+  const [fullResource, setFullResource] = useState<
+    ProjectInterfaceWithAllData[]
+  >([]);
 
+  console.log("NEW RENDER ----------------------")
   async function fetchProjects() {
     const response = await fetch(
       "https://consulting-projects.academy-faculty.repl.co/api/projects"
@@ -41,18 +44,21 @@ export function Dashboard(): JSX.Element {
   }
 
   useEffect(() => {
+      console.log("USEEFFECT RUNNING")
     fetchProjects();
     fetchClients();
     fetchEmployees();
 
     // Take each project and return an object with all key/values of project + name from clients based on the Ids matching
-    const projectsWithClientNames: ProjectInterfaceWithClientName[] = addClientNameToProjects(projects,clients)
-    const projectsWithAllInfo: ProjectInterfaceWithAllData[] = addEmployeeInfoToProjects(projectsWithClientNames, employees)
+    const projectsWithClientNames: ProjectInterfaceWithClientName[] =
+      addClientNameToProjects(projects, clients);
+    const projectsWithAllInfo: ProjectInterfaceWithAllData[] =
+      addEmployeeInfoToProjects(projectsWithClientNames, employees);
 
-    setFullResource(projectsWithAllInfo)
+    setFullResource(projectsWithAllInfo);
   }, []);
-  console.log("")
-  console.log("This is full resource", fullResource)
+
+  console.log("This is full resource", fullResource);
   return (
     <>
       <div>Hello</div>
