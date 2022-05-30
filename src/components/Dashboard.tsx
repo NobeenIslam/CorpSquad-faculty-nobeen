@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import { addClientNameToProjects } from "../utils/addClientNameToProjects";
 import {
   ClientInterface,
   EmployeeInterface,
@@ -44,17 +45,8 @@ export function Dashboard(): JSX.Element {
     fetchEmployees();
 
     // Take each project and return an object with all key/values of project + name from clients based on the Ids matching
-    const projectsWithClientNames: ProjectInterfaceWithClientName[] =
-      projects.map((project) => {
-        const thisProjectsClient = clients.find(
-          (client) => client.id === project.clientId
-        );
-        if (thisProjectsClient === undefined) {
-          return { ...project, clientName: "Client not found" };
-        } else {
-          return { ...project, clientName: thisProjectsClient.name };
-        }
-      });
+    const projectsWithClientNames: ProjectInterfaceWithClientName[] = addClientNameToProjects(projects,clients)
+;
 
     const projectsWithAllInfo: ProjectInterfaceWithAllData[] =
       projectsWithClientNames.map((project) => {
