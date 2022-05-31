@@ -4,7 +4,6 @@ import {
   ProjectInterfaceWithClientName,
 } from "./Interfaces";
 
-
 /**
  * Adds clientName to each project object in the array based on the clientID.
  * @param projects {ProjectInterface[]} Projects object array without clientName and full employee info

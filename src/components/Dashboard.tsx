@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
-import { addClientNameToProjects } from "../utils/addClientNameToProjects";
-import { addEmployeeInfoToProjects } from "../utils/addEmployeeInfoToProjects";
+import { addAllDataToProjects } from "../utils/addAllDataToProjects";
+
 import {
   fetchProjects,
   fetchClients,
@@ -11,7 +11,6 @@ import {
   EmployeeInterface,
   ProjectInterface,
   ProjectInterfaceWithAllData,
-  ProjectInterfaceWithClientName,
 } from "../utils/Interfaces";
 import { ProjectCard } from "./ProjectCard";
 
@@ -28,15 +27,12 @@ export function Dashboard(): JSX.Element {
         const clients: ClientInterface[] = await fetchClients();
         const employees: EmployeeInterface[] = await fetchEmployees();
     
-        // Take each project and return an object with all key/values of project + name from clients based on the Ids matching
-        const projectsWithClientNames: ProjectInterfaceWithClientName[] =
-          addClientNameToProjects(projects, clients);
         const projectsWithAllInfo: ProjectInterfaceWithAllData[] =
-          addEmployeeInfoToProjects(projectsWithClientNames, employees);
+          addAllDataToProjects(projects,clients, employees);
     
         setFullResource(projectsWithAllInfo);
       }
-      
+
     fetchAllData();
     //Disabling as it is saying to put clients,projects and employees in which would cause an infinite loop
     //eslint-disable-next-line

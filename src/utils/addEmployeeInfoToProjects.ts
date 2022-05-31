@@ -10,7 +10,7 @@ import {
  * have worked on the project.
  * @param projects {ProjectInterfaceWithClientName[]} Projects object array without clientName and full employee info
  * @param employees {EmployeeInterface[]} Clients object array which containts client ids and their names
- * @returns {ProjectInterfaceWithAllData[]} Projects object array with clientNames as a key/value
+ * @returns {ProjectInterfaceWithAllData[]} Projects object array with clientNames and employees' (full-info array) as a keys/values
  */
 
 export function addEmployeeInfoToProjects(
