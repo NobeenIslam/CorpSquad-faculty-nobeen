@@ -4,7 +4,12 @@ import {
   EmployeeInterface,
 } from "./Interfaces";
 
-export async function fetchProjects() {
+/**
+ * Fetch projects
+ * @returns {Promise<ProjectInterface[]>}. Returns a promise array of all the projects taken from the API
+ */
+
+export async function fetchProjects():Promise<ProjectInterface[]> {
   const response = await fetch(
     "https://consulting-projects.academy-faculty.repl.co/api/projects"
   );
@@ -12,7 +17,12 @@ export async function fetchProjects() {
   return projectsJSON;
 }
 
-export async function fetchClients() {
+/**
+ * Fetch Clients
+ * @returns {Promise<ClientInterface[]>}. Returns a promise array of all the clients taken from the API
+ */
+
+export async function fetchClients():Promise<ClientInterface[]> {
   const response = await fetch(
     "https://consulting-projects.academy-faculty.repl.co/api/clients"
   );
@@ -20,7 +30,12 @@ export async function fetchClients() {
   return clientsJSON;
 }
 
-export async function fetchEmployees() {
+/**
+ * Fetch Employees
+ * @returns {Promise<EmployeeInterface[]>}. Returns a promise array of all the employees taken from the API
+ */
+
+export async function fetchEmployees():Promise<EmployeeInterface[]> {
   const response = await fetch(
     "https://consulting-projects.academy-faculty.repl.co/api/employees"
   );

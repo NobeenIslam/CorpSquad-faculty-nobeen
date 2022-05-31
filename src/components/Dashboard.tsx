@@ -20,22 +20,23 @@ export function Dashboard(): JSX.Element {
     ProjectInterfaceWithAllData[]
   >([]);
 
-  console.log("RENDER");
+
 
   useEffect(() => {
     async function fetchAllData() {
-      const projects: ProjectInterface[] = await fetchProjects();
-      const clients: ClientInterface[] = await fetchClients();
-      const employees: EmployeeInterface[] = await fetchEmployees();
-
-      // Take each project and return an object with all key/values of project + name from clients based on the Ids matching
-      const projectsWithClientNames: ProjectInterfaceWithClientName[] =
-        addClientNameToProjects(projects, clients);
-      const projectsWithAllInfo: ProjectInterfaceWithAllData[] =
-        addEmployeeInfoToProjects(projectsWithClientNames, employees);
-
-      setFullResource(projectsWithAllInfo);
-    }
+        const projects: ProjectInterface[] = await fetchProjects();
+        const clients: ClientInterface[] = await fetchClients();
+        const employees: EmployeeInterface[] = await fetchEmployees();
+    
+        // Take each project and return an object with all key/values of project + name from clients based on the Ids matching
+        const projectsWithClientNames: ProjectInterfaceWithClientName[] =
+          addClientNameToProjects(projects, clients);
+        const projectsWithAllInfo: ProjectInterfaceWithAllData[] =
+          addEmployeeInfoToProjects(projectsWithClientNames, employees);
+    
+        setFullResource(projectsWithAllInfo);
+      }
+      
     fetchAllData();
     //Disabling as it is saying to put clients,projects and employees in which would cause an infinite loop
     //eslint-disable-next-line
