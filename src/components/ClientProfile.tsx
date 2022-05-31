@@ -20,7 +20,7 @@ export function ClientProfile(): JSX.Element {
 
   return (
     <main className="mainContent">
-      <h1 className="revenue">Client: {thisClientsName}</h1>
+      <h1 className="title">Client: {thisClientsName}</h1>
       <section className="dashboard">{thisClientsProjectCards}</section>
     </main>
   );

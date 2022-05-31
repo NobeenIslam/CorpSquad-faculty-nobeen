@@ -68,7 +68,7 @@ export function Dashboard(): JSX.Element {
   return (
     <>
       <main className="mainContent">
-        <h1 className="revenue">Aggregate Revenue: £{aggregateRevenue}</h1>
+        <h1 className="title">Aggregate Revenue: £{aggregateRevenue}</h1>
         <section className="dashboard">{projectCards}</section>
       </main>
     </>

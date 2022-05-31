@@ -17,7 +17,7 @@ export function ProjectCard({
 
   return (
     <section className="projectCard">
-      <h2>{project.id}</h2>
+      <h2>Project Id: {project.id}</h2>
       <div>
         <b>Start-Date:</b> {project.contract.startDate} || End-Date:{" "}
         {project.contract.endDate}
