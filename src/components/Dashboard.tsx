@@ -64,7 +64,7 @@ export function Dashboard(): JSX.Element {
 
   return (
     <>
-      <main>{projectCards}</main>
+      <main className="dashboard">{projectCards}</main>
     </>
   );
 }

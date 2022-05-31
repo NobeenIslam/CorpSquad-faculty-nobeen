@@ -1,3 +1,81 @@
+/* NavBar classes and flexContainers */
+.navBar{
+    background-color: aliceblue;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+
+.navBar>.homeLink{
+    margin-left: 5px;
+}
+
+.navBar>.logo{
+    font-size: xx-large;
+    margin-left:auto;
+    margin-right: 5px;
+}
+
+/* DashBoard classes and flexContainers */
+.dashboard{
+    display:flex;
+    flex-direction: column;
+    background-color: lightblue;
+    padding: 5%
+}
+
+.dashboard > .projectCard{
+    display:flex;
+    flex-direction:column;
+    background-color:  beige;
+    border-color: black;
+    padding: 1%;
+    margin: 10px;
+    border-style:solid;
+    width: 100%
+}
+
+.dashboard> .projectCard> h2{
+    margin: 5px auto
+}
+.dashboard> .projectCard > div {
+    margin: auto
+}
+
+.dashboard> .projectCard > .employeeTokensContainer{
+    margin: 10px;
+    display:flex;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+.dashboard> .projectCard > .employeeTokensContainer > .employeeToken{
+    display:flex;
+    flex-direction: column;
+    margin: 5px;
+    align-items: center;
+
+}
+
+/* Misc */
+img{
+    border-radius: 50%;
+}
+
+/* For debugging CSS */
+
+.blue{
+    background-color: blue;
+}
+
 .red{
     background-color: red;
+}
+
+.purple{
+    background-color: purple;
+}
+
+.yellow{
+    background-color: yellow;
 }
