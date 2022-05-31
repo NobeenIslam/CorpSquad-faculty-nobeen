@@ -18,7 +18,6 @@ export function Dashboard(): JSX.Element {
     ProjectInterfaceWithAllData[]
   >([]);
 
-  console.log("NEW RENDER ----------------------")
   async function fetchProjects() {
     const response = await fetch(
       "https://consulting-projects.academy-faculty.repl.co/api/projects"
@@ -44,7 +43,6 @@ export function Dashboard(): JSX.Element {
   }
 
   useEffect(() => {
-      console.log("USEEFFECT RUNNING")
     fetchProjects();
     fetchClients();
     fetchEmployees();
@@ -60,13 +58,13 @@ export function Dashboard(): JSX.Element {
     //eslint-disable-next-line
   }, []);
 
-  const projectCards: JSX.Element[] = fullResource.map((project)=> <ProjectCard key ={project.id}  project = {project}/>)
-  
+  const projectCards: JSX.Element[] = fullResource.map((project) => (
+    <ProjectCard key={project.id} project={project} />
+  ));
+
   return (
     <>
-     <main>
-        {projectCards}
-     </main>
+      <main>{projectCards}</main>
     </>
   );
 }

@@ -1,9 +1,13 @@
-import { ClientInterface, ProjectInterface, ProjectInterfaceWithClientName } from "./Interfaces";
+import {
+  ClientInterface,
+  ProjectInterface,
+  ProjectInterfaceWithClientName,
+} from "./Interfaces";
 
 export function addClientNameToProjects(
   projects: ProjectInterface[],
   clients: ClientInterface[]
-):ProjectInterfaceWithClientName[] {
+): ProjectInterfaceWithClientName[] {
   const projectsWithClientNames = projects.map((project) => {
     const thisProjectsClient = clients.find(
       (client) => client.id === project.clientId

@@ -6,9 +6,10 @@ interface ProjectCardProps {
 }
 
 export function ProjectCard({ project }: ProjectCardProps): JSX.Element {
+  const employeeTokens: JSX.Element[] = project.employees.map((employee) => (
+    <EmployeeToken key={employee.id} employee={employee} />
+  ));
 
-  const employeeTokens: JSX.Element[] = project.employees.map((employee)=><EmployeeToken key= {employee.id} employee={employee}/>)
-  
   return (
     <section>
       <h2>{project.id}</h2>
