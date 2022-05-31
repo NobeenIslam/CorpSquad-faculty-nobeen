@@ -1,8 +1,5 @@
 import { useLocation, useParams } from "react-router-dom";
-import {
-  EmployeeInterface,
-  ProjectInterfaceWithAllData,
-} from "../utils/Interfaces";
+import { ProjectInterfaceWithAllData } from "../utils/Interfaces";
 import { EmployeeToken } from "./EmployeeToken";
 import { ProjectCard } from "./ProjectCard";
 
