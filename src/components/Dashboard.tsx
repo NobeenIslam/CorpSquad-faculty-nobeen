@@ -62,9 +62,21 @@ export function Dashboard(): JSX.Element {
     <ProjectCard key={project.id} project={project} />
   ));
 
+  function sumAllRevenues(projects: ProjectInterfaceWithAllData[]): number {
+    const aggregateRevenue = projects.reduce((acc, project) => {
+      const runningTotal = acc + parseInt(project.contract.size);
+      return runningTotal;
+    }, 0);
+    return aggregateRevenue;
+  }
+
+  const aggregateRevenue = sumAllRevenues(state.fullResource);
   return (
     <>
-      <main className="dashboard">{projectCards}</main>
+      <main className="mainContent">
+        <h1 className="revenue">Aggregate Revenue: £{aggregateRevenue}</h1>
+        <section className="dashboard">{projectCards}</section>
+      </main>
     </>
   );
 }

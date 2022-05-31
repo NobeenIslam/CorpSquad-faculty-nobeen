@@ -15,8 +15,18 @@
     margin-left:auto;
     margin-right: 5px;
 }
+/* Centering all in main content */
+.mainContent{
+    display: flex;
+    flex-direction: column;
+}
 
+.mainContent> .revenue{
+    margin: auto;
+    margin-bottom: 5px;
+}
 /* DashBoard classes and flexContainers */
+/*Note that dashboard is a child of mainContent also, Excluded for brevity*/
 .dashboard{
     display:flex;
     flex-direction: column;
@@ -61,6 +71,7 @@
 img{
     border-radius: 50%;
 }
+
 
 /* For debugging CSS */
 
