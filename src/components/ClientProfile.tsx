@@ -1,4 +1,5 @@
 import { useLocation, useParams } from "react-router-dom";
+import { getClientsEmployees } from "../utils/getClientsEmployees";
 import { ProjectInterfaceWithAllData } from "../utils/Interfaces";
 import { EmployeeToken } from "./EmployeeToken";
 import { ProjectCard } from "./ProjectCard";
@@ -12,14 +13,7 @@ export function ClientProfile(): JSX.Element {
     (project) => clientId === project.clientId
   );
   const thisClientsName = thisClientsProjects[0].clientName;
-  const thisClientsEmployeesWithDuplicates = thisClientsProjects
-    .map((project) => project.employees)
-    .flat();
-  const thisClientsEmployeesUnique = thisClientsEmployeesWithDuplicates.filter(
-    (employee, index) => {
-      return thisClientsEmployeesWithDuplicates.indexOf(employee) === index;
-    }
-  );
+  const thisClientsEmployees = getClientsEmployees(thisClientsProjects);
 
   const thisClientsProjectCards: JSX.Element[] = thisClientsProjects.map(
     (project) => (
@@ -27,10 +21,9 @@ export function ClientProfile(): JSX.Element {
     )
   );
 
-  const thisClientsEmployeeTokens: JSX.Element[] =
-    thisClientsEmployeesUnique.map((employee) => (
-      <EmployeeToken key={employee.id} employee={employee} />
-    ));
+  const thisClientsEmployeeTokens: JSX.Element[] = thisClientsEmployees.map(
+    (employee) => <EmployeeToken key={employee.id} employee={employee} />
+  );
 
   return (
     <main className="mainContent">
