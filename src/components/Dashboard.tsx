@@ -19,19 +19,17 @@ export function Dashboard(): JSX.Element {
     ProjectInterfaceWithAllData[]
   >([]);
 
-
-
   useEffect(() => {
     async function fetchAllData() {
-        const projects: ProjectInterface[] = await fetchProjects();
-        const clients: ClientInterface[] = await fetchClients();
-        const employees: EmployeeInterface[] = await fetchEmployees();
-    
-        const projectsWithAllInfo: ProjectInterfaceWithAllData[] =
-          addAllDataToProjects(projects,clients, employees);
-    
-        setFullResource(projectsWithAllInfo);
-      }
+      const projects: ProjectInterface[] = await fetchProjects();
+      const clients: ClientInterface[] = await fetchClients();
+      const employees: EmployeeInterface[] = await fetchEmployees();
+
+      const projectsWithAllInfo: ProjectInterfaceWithAllData[] =
+        addAllDataToProjects(projects, clients, employees);
+
+      setFullResource(projectsWithAllInfo);
+    }
 
     fetchAllData();
     //Disabling as it is saying to put clients,projects and employees in which would cause an infinite loop
