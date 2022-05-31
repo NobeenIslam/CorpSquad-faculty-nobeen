@@ -11,8 +11,8 @@ function App(): JSX.Element {
       <NavBar />
       <Routes>
         <Route path="/" element={<Dashboard />}></Route>
-        <Route path="/client" element={<ClientProfile />}></Route>
-        <Route path="/employee" element={<EmployeeProfile />}></Route>
+        <Route path="/clients/:clientId" element={<ClientProfile />}></Route>
+        <Route path="/employees" element={<EmployeeProfile />}></Route>
       </Routes>
       <Footer />
     </>

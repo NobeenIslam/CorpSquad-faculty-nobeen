@@ -17,17 +17,17 @@ import { ProjectCard } from "./ProjectCard";
 
 interface Action {
   type: string;
-  newFullResource: ProjectInterfaceWithAllData[];
+  newProjects: ProjectInterfaceWithAllData[];
 }
 
 interface State {
-  fullResource: ProjectInterfaceWithAllData[];
+  projects: ProjectInterfaceWithAllData[];
 }
 
 function reducer(state: State, action: Action) {
   switch (action.type) {
     case "ADD_ALL_DATA": {
-      const newState = { fullResource: action.newFullResource };
+      const newState = { projects: action.newProjects };
       return newState;
     }
     default: {
@@ -37,8 +37,9 @@ function reducer(state: State, action: Action) {
 }
 
 export function Dashboard(): JSX.Element {
+  //Declared as an object incase more states will be need in the future
   const initialState: State = {
-    fullResource: [],
+    projects: [],
   };
   const [state, dispatch] = useReducer(reducer, initialState);
 
@@ -51,7 +52,7 @@ export function Dashboard(): JSX.Element {
       const projectsWithAllInfo: ProjectInterfaceWithAllData[] =
         addAllDataToProjects(projects, clients, employees);
 
-      dispatch({ type: "ADD_ALL_DATA", newFullResource: projectsWithAllInfo });
+      dispatch({ type: "ADD_ALL_DATA", newProjects: projectsWithAllInfo });
     }
 
     fetchAllData();
@@ -59,15 +60,15 @@ export function Dashboard(): JSX.Element {
     //eslint-disable-next-line
   }, []);
 
-  const projectCards: JSX.Element[] = state.fullResource.map((project) => (
-    <ProjectCard key={project.id} project={project} />
+  const projectCards: JSX.Element[] = state.projects.map((project) => (
+    <ProjectCard key={project.id} project={project} projects={state.projects} />
   ));
 
-  const aggregateRevenue = sumAllRevenues(state.fullResource);
+  const aggregateRevenue = sumAllRevenues(state.projects);
   return (
     <>
       <main className="mainContent">
-        <h1 className="revenue">Aggregate Revenue: £{aggregateRevenue}</h1>
+        <h1 className="title">Aggregate Revenue: £{aggregateRevenue}</h1>
         <section className="dashboard">{projectCards}</section>
       </main>
     </>
