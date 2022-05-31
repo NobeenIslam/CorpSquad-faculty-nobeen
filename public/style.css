@@ -31,7 +31,8 @@
     display:flex;
     flex-direction: column;
     background-color: lightblue;
-    padding: 5%
+    padding: 5%;
+    margin: 0 5%;
 }
 
 .dashboard > .projectCard{
@@ -46,7 +47,7 @@
 }
 
 .dashboard> .projectCard> h2{
-    margin: 5px auto
+    margin: 5px auto;
 }
 .dashboard> .projectCard > div {
     margin: auto
@@ -64,6 +65,29 @@
     flex-direction: column;
     margin: 5px;
     align-items: center;
+
+}
+/*For Clients profile*/
+.clientEmployeesContainer{
+    display:flex;
+    flex-direction: column;
+    flex-wrap:wrap;
+    justify-content: center;
+    margin: 0 5%;
+
+}
+
+.clientEmployeesContainer > h2{
+    margin: 5px auto;
+
+}
+
+.clientEmployeesContainer > .clientEmployeesTokens{
+    display:flex;
+    flex-direction:row;
+    justify-content: center;
+    flex-wrap: wrap;
+    background-color: blanchedalmond;
 
 }
 

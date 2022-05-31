@@ -35,15 +35,13 @@ export function ClientProfile(): JSX.Element {
       <EmployeeToken key={employee.id} employee={employee} />
     ));
 
-  console.log(thisClientsEmployeesWithDuplicates);
-  console.log(thisClientsEmployeesUnique);
-
   return (
     <main className="mainContent">
       <h1 className="title">Client: {thisClientsName}</h1>
       <section className="dashboard">{thisClientsProjectCards}</section>
-      <section className="employeeTokensContainer">
-        {thisClientsEmployeeTokens}
+      <section className="clientEmployeesContainer">
+        <h2>All Employees affiliated with {thisClientsName}:</h2>
+        <div className="clientEmployeesTokens">{thisClientsEmployeeTokens}</div>
       </section>
     </main>
   );
