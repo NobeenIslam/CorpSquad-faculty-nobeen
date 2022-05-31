@@ -1,16 +1,27 @@
 import { useLocation, useParams } from "react-router-dom";
 import { ProjectInterfaceWithAllData } from "../utils/Interfaces";
+import { ProjectCard } from "./ProjectCard";
 
 export function ClientProfile(): JSX.Element {
   const { clientId } = useParams();
   const location = useLocation();
-  const projects = location.state as ProjectInterfaceWithAllData;
+  const projects = location.state as ProjectInterfaceWithAllData[];
 
-  console.log(projects);
+  const thisClientsProjects = projects.filter(
+    (project) => clientId === project.clientId
+  );
+  const thisClientsName = thisClientsProjects[0].clientName;
+
+  const thisClientsProjectCards: JSX.Element[] = thisClientsProjects.map(
+    (project) => (
+      <ProjectCard key={project.id} project={project} projects={projects} />
+    )
+  );
+
   return (
-    <>
-      <div>{clientId}</div>
-      {/* <div>{JSON.stringify(object)}</div> */}
-    </>
+    <main className="mainContent">
+      <h1 className="revenue">Client: {thisClientsName}</h1>
+      <section className="dashboard">{thisClientsProjectCards}</section>
+    </main>
   );
 }
