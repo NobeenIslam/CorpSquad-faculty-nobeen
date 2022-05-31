@@ -16,6 +16,7 @@ import { ProjectCard } from "./ProjectCard";
 
 interface Action {
   type: string;
+  newFullResource: ProjectInterfaceWithAllData[];
 }
 
 interface State {
@@ -23,24 +24,9 @@ interface State {
 }
 
 function reducer(state: State, action: Action) {
-  let newState = { ...state };
-
-  async function fetchAllData() {
-    const projects: ProjectInterface[] = await fetchProjects();
-    const clients: ClientInterface[] = await fetchClients();
-    const employees: EmployeeInterface[] = await fetchEmployees();
-
-    const projectsWithAllInfo: ProjectInterfaceWithAllData[] =
-      addAllDataToProjects(projects, clients, employees);
-
-    newState = {
-      fullResource: projectsWithAllInfo,
-    };
-  }
-
   switch (action.type) {
     case "ADD_ALL_DATA": {
-      fetchAllData();
+      const newState = { fullResource: action.newFullResource };
       return newState;
     }
     default: {
@@ -56,8 +42,18 @@ export function Dashboard(): JSX.Element {
   const [state, dispatch] = useReducer(reducer, initialState);
 
   useEffect(() => {
-    dispatch({ type: "ADD_ALL_DATA" });
-    //fetchAllData()
+    async function fetchAllData() {
+      const projects: ProjectInterface[] = await fetchProjects();
+      const clients: ClientInterface[] = await fetchClients();
+      const employees: EmployeeInterface[] = await fetchEmployees();
+
+      const projectsWithAllInfo: ProjectInterfaceWithAllData[] =
+        addAllDataToProjects(projects, clients, employees);
+
+      dispatch({ type: "ADD_ALL_DATA", newFullResource: projectsWithAllInfo });
+    }
+
+    fetchAllData();
     //Disabling as it is saying to put clients,projects and employees in which would cause an infinite loop
     //eslint-disable-next-line
   }, []);
@@ -68,8 +64,6 @@ export function Dashboard(): JSX.Element {
 
   return (
     <>
-      fff
-      <div></div>
       <main>{projectCards}</main>
     </>
   );
