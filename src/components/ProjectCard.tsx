@@ -11,14 +11,20 @@ export function ProjectCard({ project }: ProjectCardProps): JSX.Element {
   ));
 
   return (
-    <section className = "projectCard" >
+    <section className="projectCard">
       <h2>{project.id}</h2>
-      <div>Start-Date:{project.contract.startDate}</div>
-      <div>End-Date:{project.contract.endDate}</div>
-      <div>Client: {project.clientName}</div>
-      <div>Revenue: £{project.contract.size}</div>
+      <div>
+        <b>Start-Date:</b> {project.contract.startDate} || End-Date:{" "}
+        {project.contract.endDate}
+      </div>
+      <div>
+        <b>Client:</b> {project.clientName}
+      </div>
+      <div>
+        <b>Revenue:</b> £{project.contract.size}
+      </div>
       <h3>Employees:</h3>
-      <section className = "employeeTokens">{employeeTokens}</section>
+      <section className="employeeTokens">{employeeTokens}</section>
     </section>
   );
 }

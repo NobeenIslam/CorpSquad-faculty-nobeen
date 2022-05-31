@@ -1,14 +1,14 @@
 .dashboard{
     display:flex;
     flex-direction: column;
-    background-color: red;
+    background-color: lightblue;
     padding: 5%
 }
 
 .dashboard > .projectCard{
     display:flex;
     flex-direction:column;
-    background-color:  blue;
+    background-color:  beige;
     border-color: black;
     padding: 1%;
     margin: 10px;
@@ -17,7 +17,7 @@
 }
 
 .projectCard>h2{
-    margin: auto
+    margin: 5px auto
 }
 .projectCard > div {
     margin: auto

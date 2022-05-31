@@ -6,7 +6,7 @@ interface EmployeeTokenProps {
 
 export function EmployeeToken({ employee }: EmployeeTokenProps): JSX.Element {
   return (
-    <div className = "employeeToken ">
+    <div className="employeeToken ">
       <img src={employee.avatar} alt="" />
       <p>{employee.name}</p>
     </div>
