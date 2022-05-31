@@ -60,9 +60,13 @@ export function Dashboard(): JSX.Element {
     //eslint-disable-next-line
   }, []);
 
+  const projectCards: JSX.Element[] = fullResource.map((project)=> <ProjectCard key ={project.id}  project = {project}/>)
+  
   return (
     <>
-      <ProjectCard project={projects[1]} />
+     <main>
+        {projectCards}
+     </main>
     </>
   );
 }
