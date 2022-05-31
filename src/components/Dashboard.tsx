@@ -2,6 +2,11 @@ import { useEffect, useState } from "react";
 import { addClientNameToProjects } from "../utils/addClientNameToProjects";
 import { addEmployeeInfoToProjects } from "../utils/addEmployeeInfoToProjects";
 import {
+  fetchProjects,
+  fetchClients,
+  fetchEmployees,
+} from "../utils/fetchData";
+import {
   ClientInterface,
   EmployeeInterface,
   ProjectInterface,
@@ -17,30 +22,6 @@ export function Dashboard(): JSX.Element {
 
   console.log("RENDER");
 
-  async function fetchProjects() {
-    const response = await fetch(
-      "https://consulting-projects.academy-faculty.repl.co/api/projects"
-    );
-    const projectsJSON: ProjectInterface[] = await response.json();
-    return projectsJSON;
-  }
-
-  async function fetchClients() {
-    const response = await fetch(
-      "https://consulting-projects.academy-faculty.repl.co/api/clients"
-    );
-    const clientsJSON: ClientInterface[] = await response.json();
-    return clientsJSON;
-  }
-
-  async function fetchEmployees() {
-    const response = await fetch(
-      "https://consulting-projects.academy-faculty.repl.co/api/employees"
-    );
-    const employeesJSON: EmployeeInterface[] = await response.json();
-    return employeesJSON;
-  }
-
   useEffect(() => {
     async function fetchAllData() {
       const projects: ProjectInterface[] = await fetchProjects();
@@ -55,7 +36,7 @@ export function Dashboard(): JSX.Element {
 
       setFullResource(projectsWithAllInfo);
     }
-    fetchAllData()
+    fetchAllData();
     //Disabling as it is saying to put clients,projects and employees in which would cause an infinite loop
     //eslint-disable-next-line
   }, []);
