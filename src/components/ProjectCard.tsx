@@ -24,7 +24,7 @@ export function ProjectCard({ project }: ProjectCardProps): JSX.Element {
         <b>Revenue:</b> £{project.contract.size}
       </div>
       <h3>Employees:</h3>
-      <section className="employeeTokens">{employeeTokens}</section>
+      <section className="employeeTokensContainer">{employeeTokens}</section>
     </section>
   );
 }

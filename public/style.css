@@ -1,3 +1,22 @@
+/* NavBar classes and flexContainers */
+.navBar{
+    background-color: aliceblue;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+
+.navBar>.homeLink{
+    margin-left: 5px;
+}
+
+.navBar>.logo{
+    font-size: xx-large;
+    margin-left:auto;
+    margin-right: 5px;
+}
+
+/* DashBoard classes and flexContainers */
 .dashboard{
     display:flex;
     flex-direction: column;
@@ -16,33 +35,34 @@
     width: 100%
 }
 
-.projectCard>h2{
+.dashboard> .projectCard> h2{
     margin: 5px auto
 }
-.projectCard > div {
+.dashboard> .projectCard > div {
     margin: auto
 }
 
-.projectCard > .employeeTokens{
+.dashboard> .projectCard > .employeeTokensContainer{
     margin: 10px;
     display:flex;
     flex-wrap: wrap;
     justify-content: center;
-    background-color: purple;
 }
 
-.employeeTokens > .employeeToken{
+.dashboard> .projectCard > .employeeTokensContainer > .employeeToken{
     display:flex;
     flex-direction: column;
     margin: 5px;
-    background-color: yellow;
     align-items: center;
 
 }
 
+/* Misc */
 img{
     border-radius: 50%;
 }
+
+/* For debugging CSS */
 
 .blue{
     background-color: blue;
