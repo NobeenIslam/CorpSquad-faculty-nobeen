@@ -12,6 +12,7 @@ import {
   ProjectInterface,
   ProjectInterfaceWithAllData,
 } from "../utils/Interfaces";
+import { sumAllRevenues } from "../utils/sumAllRevenues";
 import { ProjectCard } from "./ProjectCard";
 
 interface Action {
@@ -61,14 +62,6 @@ export function Dashboard(): JSX.Element {
   const projectCards: JSX.Element[] = state.fullResource.map((project) => (
     <ProjectCard key={project.id} project={project} />
   ));
-
-  function sumAllRevenues(projects: ProjectInterfaceWithAllData[]): number {
-    const aggregateRevenue = projects.reduce((acc, project) => {
-      const runningTotal = acc + parseInt(project.contract.size);
-      return runningTotal;
-    }, 0);
-    return aggregateRevenue;
-  }
 
   const aggregateRevenue = sumAllRevenues(state.fullResource);
   return (

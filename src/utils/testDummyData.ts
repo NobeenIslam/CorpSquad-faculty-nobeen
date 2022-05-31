@@ -11,7 +11,7 @@ export const testProjects = [
     contract: {
       startDate: "Thu Jun 20 2019",
       endDate: "Thu Dec 30 2021",
-      size: "47362.95",
+      size: "60",
     },
   },
   {
@@ -21,7 +21,7 @@ export const testProjects = [
     contract: {
       startDate: "Sat Jan 02 2021",
       endDate: "Mon Jun 21 2021",
-      size: "29267.84",
+      size: "61",
     },
   },
 ];
@@ -56,12 +56,12 @@ const client2 = {
 
 export const testClients = [client1, client2];
 
-export const testResult1: ProjectInterfaceWithClientName[] = [
+export const testProjectsWithClientNames: ProjectInterfaceWithClientName[] = [
   { ...testProjects[0], clientName: "Murray, Corwin and Mante" },
   { ...testProjects[1], clientName: "Will - Lehner" },
 ];
 
-export const testResult2: ProjectInterfaceWithAllData[] = [
+export const testProjectsWithAllData: ProjectInterfaceWithAllData[] = [
   {
     ...testProjects[0],
     clientName: "Murray, Corwin and Mante",
