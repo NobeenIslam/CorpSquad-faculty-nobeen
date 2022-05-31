@@ -12,6 +12,7 @@ import {
   ProjectInterface,
   ProjectInterfaceWithAllData,
 } from "../utils/Interfaces";
+import { sumAllRevenues } from "../utils/sumAllRevenues";
 import { ProjectCard } from "./ProjectCard";
 
 interface Action {
@@ -62,9 +63,13 @@ export function Dashboard(): JSX.Element {
     <ProjectCard key={project.id} project={project} />
   ));
 
+  const aggregateRevenue = sumAllRevenues(state.fullResource);
   return (
     <>
-      <main className="dashboard">{projectCards}</main>
+      <main className="mainContent">
+        <h1 className="revenue">Aggregate Revenue: £{aggregateRevenue}</h1>
+        <section className="dashboard">{projectCards}</section>
+      </main>
     </>
   );
 }
