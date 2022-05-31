@@ -1,4 +1,5 @@
 import {
+  BlankEmployeeInterface,
   EmployeeInterface,
   ProjectInterfaceWithAllData,
   ProjectInterfaceWithClientName,
@@ -13,7 +14,8 @@ export function addEmployeeInfoToProjects(
       //For each employee id in the project get his/her full data by searching through employees
       const fullEmployeeData = employees.find((employee) => id === employee.id);
       if (fullEmployeeData === undefined) {
-        return "Employee not found";
+        const blankEmployee: BlankEmployeeInterface = {id:"Employee Not Found", name:"Employee Not Found",role:"Employee Not Found", avatar:"" }
+        return blankEmployee
       } else {
         return fullEmployeeData;
       }

@@ -14,7 +14,7 @@ export interface ProjectInterfaceWithClientName {
 }
 
 export interface ProjectInterfaceWithAllData {
-  employees: ("Employee not found" | EmployeeInterface)[];
+  employees: EmployeeInterface[];
   id: string;
   clientId: string;
   clientName: string;
@@ -33,6 +33,13 @@ export interface EmployeeInterface {
   name: string;
   role: string;
   avatar: string;
+}
+
+export interface BlankEmployeeInterface {
+  id: "Employee Not Found";
+  name: "Employee Not Found";
+  role: "Employee Not Found";
+  avatar: "";
 }
 
 export interface ClientInterface {
