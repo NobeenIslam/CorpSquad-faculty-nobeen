@@ -37,6 +37,7 @@ function reducer(state: State, action: Action) {
 }
 
 export function Dashboard(): JSX.Element {
+  //Declared as an object incase more states will be need in the future
   const initialState: State = {
     projects: [],
   };
@@ -60,7 +61,7 @@ export function Dashboard(): JSX.Element {
   }, []);
 
   const projectCards: JSX.Element[] = state.projects.map((project) => (
-    <ProjectCard key={project.id} project={project} />
+    <ProjectCard key={project.id} project={project} projects={state.projects} />
   ));
 
   const aggregateRevenue = sumAllRevenues(state.projects);
