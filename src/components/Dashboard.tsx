@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useReducer } from "react";
 import { addAllDataToProjects } from "../utils/addAllDataToProjects";
 
 import {
@@ -14,10 +14,32 @@ import {
 } from "../utils/Interfaces";
 import { ProjectCard } from "./ProjectCard";
 
+interface Action {
+  type: string;
+  newFullResource: ProjectInterfaceWithAllData[];
+}
+
+interface State {
+  fullResource: ProjectInterfaceWithAllData[];
+}
+
+function reducer(state: State, action: Action) {
+  switch (action.type) {
+    case "ADD_ALL_DATA": {
+      const newState = { fullResource: action.newFullResource };
+      return newState;
+    }
+    default: {
+      return state;
+    }
+  }
+}
+
 export function Dashboard(): JSX.Element {
-  const [fullResource, setFullResource] = useState<
-    ProjectInterfaceWithAllData[]
-  >([]);
+  const initialState: State = {
+    fullResource: [],
+  };
+  const [state, dispatch] = useReducer(reducer, initialState);
 
   useEffect(() => {
     async function fetchAllData() {
@@ -28,7 +50,7 @@ export function Dashboard(): JSX.Element {
       const projectsWithAllInfo: ProjectInterfaceWithAllData[] =
         addAllDataToProjects(projects, clients, employees);
 
-      setFullResource(projectsWithAllInfo);
+      dispatch({ type: "ADD_ALL_DATA", newFullResource: projectsWithAllInfo });
     }
 
     fetchAllData();
@@ -36,7 +58,7 @@ export function Dashboard(): JSX.Element {
     //eslint-disable-next-line
   }, []);
 
-  const projectCards: JSX.Element[] = fullResource.map((project) => (
+  const projectCards: JSX.Element[] = state.fullResource.map((project) => (
     <ProjectCard key={project.id} project={project} />
   ));
 
