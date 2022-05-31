@@ -5,7 +5,7 @@ export function sumAllRevenues(
 ): number {
   const aggregateRevenue = projects.reduce((acc, project) => {
     const thisProjectRevenue = parseInt(project.contract.size);
-    if (thisProjectRevenue === NaN) {
+    if (isNaN(thisProjectRevenue)) {
       return acc + 0;
     } else {
       return acc + thisProjectRevenue;
