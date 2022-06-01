@@ -4,16 +4,19 @@ import { ProjectInterfaceWithAllData } from "../Interfaces";
 export const dashboardActionsLibrary = {
   SET_PROJECTS: "SET_PROJECTS",
   SET_CLIENT_SEARCH: "SET_CLIENT_SEARCH",
+  SET_EMPLOYEE_SEARCH: "SET_EMPLOYEE_SEARCH",
 };
 
 export const initialDashboardState: DashboardState = {
   projects: [],
   clientSearch: "Select a Client...",
+  employeeSearch: "Select an Employee...",
 };
 
 export interface DashboardState {
   projects: ProjectInterfaceWithAllData[];
   clientSearch: string;
+  employeeSearch: string;
 }
 
 export interface DashboardActions {
@@ -31,6 +34,9 @@ export function dashboardReducer(
     }
     case dashboardActionsLibrary.SET_CLIENT_SEARCH: {
       return { ...state, clientSearch: action.payload.clientSearch };
+    }
+    case dashboardActionsLibrary.SET_EMPLOYEE_SEARCH: {
+      return { ...state, employeeSearch: action.payload.employeeSearch };
     }
     default: {
       return state;

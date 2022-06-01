@@ -20,6 +20,7 @@ import {
   dashboardReducer,
   initialDashboardState,
 } from "../utils/reducerStateManagement/dashboardManager";
+import { getProjectsEmployeeNames } from "../utils/unitFunctions/getProjectsEmployeeNames";
 
 export function Dashboard(): JSX.Element {
   const [dashboardState, dashboardDispatch] = useReducer(
@@ -47,7 +48,7 @@ export function Dashboard(): JSX.Element {
     //eslint-disable-next-line
   }, []);
 
-  console.log(dashboardState.clientSearch);
+  console.log(dashboardState.employeeSearch);
 
   const aggregateRevenue = sumAllRevenues(dashboardState.projects);
 
@@ -57,6 +58,14 @@ export function Dashboard(): JSX.Element {
     filteredProjects = dashboardState.projects.filter(
       (project) => project.clientName === dashboardState.clientSearch
     );
+  }
+
+  if (dashboardState.employeeSearch !== "Select an Employee...") {
+    console.log("Enter the zone");
+    filteredProjects = filteredProjects.filter((project) => {
+      const thisProjectsEmployeeNames = getProjectsEmployeeNames(project);
+      return thisProjectsEmployeeNames.includes(dashboardState.employeeSearch);
+    });
   }
 
   const projectCards: JSX.Element[] = filteredProjects.map((project) => (
