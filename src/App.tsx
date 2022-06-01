@@ -12,7 +12,10 @@ function App(): JSX.Element {
       <Routes>
         <Route path="/" element={<Dashboard />}></Route>
         <Route path="/clients/:clientId" element={<ClientProfile />}></Route>
-        <Route path="/employees" element={<EmployeeProfile />}></Route>
+        <Route
+          path="/employees/:employeeId"
+          element={<EmployeeProfile />}
+        ></Route>
       </Routes>
       <Footer />
     </>
