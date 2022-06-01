@@ -1,8 +1,3 @@
-export interface State {
-  projects: ProjectInterfaceWithAllData[];
-  clientSearch: string;
-}
-
 export interface ProjectInterface {
   id: string;
   clientId: string;

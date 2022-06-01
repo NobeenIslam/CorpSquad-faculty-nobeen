@@ -1,8 +1,10 @@
 import { useEffect, useReducer } from "react";
-import { ClientInterface, EmployeeInterface, State } from "../utils/Interfaces";
+import { ClientInterface, EmployeeInterface } from "../utils/Interfaces";
 import { fetchClients, fetchEmployees } from "../utils/unitFunctions/fetchData";
+import { DashboardState } from "./Dashboard";
+
 interface SearchControlsProps {
-  state: State;
+  dashboardState: DashboardState;
 }
 
 interface SearchControlsState {
@@ -37,7 +39,9 @@ function searchControlsreducer(
   }
 }
 
-export function SearchControls({ state }: SearchControlsProps): JSX.Element {
+export function SearchControls({
+  dashboardState,
+}: SearchControlsProps): JSX.Element {
   const initialSearchControlsState = {
     clients: [],
     employees: [],
@@ -73,7 +77,7 @@ export function SearchControls({ state }: SearchControlsProps): JSX.Element {
 
   return (
     <>
-      <div>Project Count: {state.projects.length} </div>
+      <div>Project Count: {dashboardState.projects.length} </div>
       <select>
         <option></option>
       </select>

@@ -11,29 +11,36 @@ import {
   EmployeeInterface,
   ProjectInterface,
   ProjectInterfaceWithAllData,
-  State,
 } from "../utils/Interfaces";
 import { sumAllRevenues } from "../utils/unitFunctions/sumAllRevenues";
 import { ProjectCard } from "./ProjectCard";
 import { SearchControls } from "./SearchControls";
 
-interface Action {
+export interface DashboardState {
+  projects: ProjectInterfaceWithAllData[];
+  clientSearch: string;
+}
+
+interface DashboardActions {
   type: string;
-  payload: State; //Send a payload with dispatch that has all the state information to update / keep the same
+  payload: DashboardState; //Send a payload with dispatch that has all the state information to update / keep the same
 }
 
 //To protect against string typos and hard-coded strings everywhere in the code
-const actionsLibrary = {
+const dashboardActionsLibrary = {
   SET_PROJECTS: "SET_PROJECTS",
   SET_CLIENT_SEARCH: "SET_CLIENT_SEARCH",
 };
 
-function reducer(state: State, action: Action): State {
+function reducer(
+  state: DashboardState,
+  action: DashboardActions
+): DashboardState {
   switch (action.type) {
-    case actionsLibrary.SET_PROJECTS: {
+    case dashboardActionsLibrary.SET_PROJECTS: {
       return { ...state, projects: action.payload.projects }; //Keep all other state variables the same and only update projects
     }
-    case actionsLibrary.SET_CLIENT_SEARCH: {
+    case dashboardActionsLibrary.SET_CLIENT_SEARCH: {
       return { ...state, clientSearch: "test" };
     }
     default: {
@@ -43,7 +50,7 @@ function reducer(state: State, action: Action): State {
 }
 
 export function Dashboard(): JSX.Element {
-  const initialState: State = {
+  const initialState: DashboardState = {
     projects: [],
     clientSearch: "",
   };
@@ -59,7 +66,7 @@ export function Dashboard(): JSX.Element {
         addAllDataToProjects(projects, clients, employees);
 
       dispatch({
-        type: actionsLibrary.SET_PROJECTS,
+        type: dashboardActionsLibrary.SET_PROJECTS,
         payload: { ...state, projects: projectsWithAllInfo },
       });
       //In dispatch send a payload which keeps all other states the same and only sends the new "projects" information we want to update
@@ -79,7 +86,7 @@ export function Dashboard(): JSX.Element {
     <>
       <main className="mainContent">
         <h1 className="title">Aggregate Revenue: £{aggregateRevenue}</h1>
-        <SearchControls state={state} />
+        <SearchControls dashboardState={state} />
         <section className="dashboard">{projectCards}</section>
       </main>
     </>
