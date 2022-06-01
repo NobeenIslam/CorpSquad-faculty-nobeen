@@ -12,7 +12,6 @@ interface State {
 }
 
 export function EmployeeProfile(): JSX.Element {
-  //const { employeeId } = useParams();
   const location = useLocation();
   const { projects, employee } = location.state as State;
 
@@ -26,9 +25,8 @@ export function EmployeeProfile(): JSX.Element {
     )
   );
 
-  console.log(thisEmployeesProjects);
   return (
-    <main>
+    <main className="mainContent">
       <EmployeeTokenForPage employee={employee} />
       <section className="dashboard">{thisEmployeesProjectsCards}</section>
     </main>
