@@ -1,9 +1,10 @@
-import { useLocation, useParams } from "react-router-dom";
+import { useLocation } from "react-router-dom";
 import {
   EmployeeInterface,
   ProjectInterfaceWithAllData,
 } from "../utils/Interfaces";
-import { EmployeeToken } from "./EmployeeToken";
+import { EmployeeTokenForPage } from "./EmployeeTokenForPage";
+import { ProjectCard } from "./ProjectCard";
 
 interface State {
   projects: ProjectInterfaceWithAllData[];
@@ -11,15 +12,25 @@ interface State {
 }
 
 export function EmployeeProfile(): JSX.Element {
-  const { employeeId } = useParams();
+  //const { employeeId } = useParams();
   const location = useLocation();
   const { projects, employee } = location.state as State;
 
-  console.log(projects);
+  const thisEmployeesProjects = projects.filter((project) =>
+    project.employees.includes(employee)
+  );
+
+  const thisEmployeesProjectsCards: JSX.Element[] = thisEmployeesProjects.map(
+    (project) => (
+      <ProjectCard key={project.id} project={project} projects={projects} />
+    )
+  );
+
+  console.log(thisEmployeesProjects);
   return (
     <main>
-      <EmployeeToken employee={employee} projects={projects} />
-      <p>{employee.role}</p>
+      <EmployeeTokenForPage employee={employee} />
+      <section className="dashboard">{thisEmployeesProjectsCards}</section>
     </main>
   );
 }
