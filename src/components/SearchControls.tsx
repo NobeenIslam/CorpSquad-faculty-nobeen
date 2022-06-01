@@ -1,7 +1,7 @@
 import { useEffect, useReducer } from "react";
 import { ClientInterface, EmployeeInterface } from "../utils/Interfaces";
+import { DashboardState } from "../utils/reducerStateManagement/dashboardManager";
 import { fetchClients, fetchEmployees } from "../utils/unitFunctions/fetchData";
-import { DashboardState } from "./Dashboard";
 
 interface SearchControlsProps {
   dashboardState: DashboardState;
