@@ -24,13 +24,13 @@ interface Action {
 
 //To protect against string typos and hard-coded strings everywhere in the code
 const actionsLibrary = {
-  ADD_ALL_DATA: "ADD_ALL_DATA",
+  SET_PROJECTS: "SET_PROJECTS",
   SET_CLIENT_SEARCH: "SET_CLIENT_SEARCH",
 };
 
 function reducer(state: State, action: Action): State {
   switch (action.type) {
-    case actionsLibrary.ADD_ALL_DATA: {
+    case actionsLibrary.SET_PROJECTS: {
       return { ...state, projects: action.payload.projects }; //Keep all other state variables the same and only update projects
     }
     case actionsLibrary.SET_CLIENT_SEARCH: {
@@ -59,7 +59,7 @@ export function Dashboard(): JSX.Element {
         addAllDataToProjects(projects, clients, employees);
 
       dispatch({
-        type: actionsLibrary.ADD_ALL_DATA,
+        type: actionsLibrary.SET_PROJECTS,
         payload: { ...state, projects: projectsWithAllInfo },
       });
       //In dispatch send a payload which keeps all other states the same and only sends the new "projects" information we want to update
