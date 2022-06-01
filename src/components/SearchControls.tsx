@@ -1,51 +1,19 @@
 import { useEffect, useReducer } from "react";
-import { ClientInterface, EmployeeInterface } from "../utils/Interfaces";
 import { DashboardState } from "../utils/reducerStateManagement/dashboardManager";
+import {
+  searchControlsreducer,
+  initialSearchControlsState,
+  searchControlsActionsLibrary,
+} from "../utils/reducerStateManagement/searchControlsManager";
 import { fetchClients, fetchEmployees } from "../utils/unitFunctions/fetchData";
 
 interface SearchControlsProps {
   dashboardState: DashboardState;
 }
 
-interface SearchControlsState {
-  clients: ClientInterface[];
-  employees: EmployeeInterface[];
-}
-
-interface SearchControlsActions {
-  type: string;
-  payload: SearchControlsState;
-}
-
-const searchControlsActionsLibrary = {
-  SET_CLIENTS: "SET_CLIENTS",
-  SET_EMPLOYEES: "SET_EMPLOYEES",
-};
-
-function searchControlsreducer(
-  state: SearchControlsState,
-  action: SearchControlsActions
-): SearchControlsState {
-  switch (action.type) {
-    case searchControlsActionsLibrary.SET_CLIENTS: {
-      return { ...state, clients: action.payload.clients };
-    }
-    case searchControlsActionsLibrary.SET_EMPLOYEES: {
-      return { ...state, employees: action.payload.employees };
-    }
-    default: {
-      return state;
-    }
-  }
-}
-
 export function SearchControls({
   dashboardState,
 }: SearchControlsProps): JSX.Element {
-  const initialSearchControlsState = {
-    clients: [],
-    employees: [],
-  };
   const [searchControlsState, dispatch] = useReducer(
     searchControlsreducer,
     initialSearchControlsState
