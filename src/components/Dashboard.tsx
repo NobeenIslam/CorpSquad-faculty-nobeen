@@ -60,12 +60,17 @@ export function Dashboard(): JSX.Element {
     );
   }
 
+  function doesProjectIncludeEmployee(
+    project: ProjectInterfaceWithAllData
+  ): boolean {
+    const thisProjectsEmployeeNames = getProjectsEmployeeNames(project);
+    return thisProjectsEmployeeNames.includes(dashboardState.employeeSearch);
+  }
+
   if (dashboardState.employeeSearch !== "Select an Employee...") {
-    console.log("Enter the zone");
-    filteredProjects = filteredProjects.filter((project) => {
-      const thisProjectsEmployeeNames = getProjectsEmployeeNames(project);
-      return thisProjectsEmployeeNames.includes(dashboardState.employeeSearch);
-    });
+    filteredProjects = filteredProjects.filter((project) =>
+      doesProjectIncludeEmployee(project)
+    );
   }
 
   const projectCards: JSX.Element[] = filteredProjects.map((project) => (
