@@ -57,6 +57,7 @@ export function SearchControls({
   const clientNames = searchControlsState.clients
     .map((client) => client.name)
     .sort();
+
   const employeeNames = searchControlsState.employees
     .map((employee) => employee.name)
     .sort();

@@ -21,6 +21,7 @@ import {
   initialDashboardState,
 } from "../utils/reducerStateManagement/dashboardManager";
 import { getProjectsEmployeeNames } from "../utils/unitFunctions/getProjectsEmployeeNames";
+import { mostRecentStartDateFirst } from "../utils/unitFunctions/sortDateFunctions";
 
 export function Dashboard(): JSX.Element {
   const [dashboardState, dashboardDispatch] = useReducer(
@@ -50,7 +51,11 @@ export function Dashboard(): JSX.Element {
 
   const aggregateRevenue = sumAllRevenues(dashboardState.projects);
 
-  let filteredProjects: ProjectInterfaceWithAllData[] = dashboardState.projects;
+  //order by startDate by default
+  let filteredProjects: ProjectInterfaceWithAllData[] =
+    dashboardState.projects.sort((proj1, proj2) =>
+      mostRecentStartDateFirst(proj1, proj2)
+    );
 
   if (dashboardState.clientSearch !== "Select a Client...") {
     filteredProjects = dashboardState.projects.filter(

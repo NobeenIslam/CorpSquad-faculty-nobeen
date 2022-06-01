@@ -4,7 +4,7 @@ import { Link } from "react-router-dom";
 
 interface ProjectCardProps {
   project: ProjectInterfaceWithAllData;
-  projects: ProjectInterfaceWithAllData[];
+  projects: ProjectInterfaceWithAllData[]; //Passing down to children so it can be used in EmployeeToken Link
 }
 
 export function ProjectCard({
