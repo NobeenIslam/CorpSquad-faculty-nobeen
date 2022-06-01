@@ -27,6 +27,7 @@ export function SearchControls({
         dispatch({
           type: searchControlsActionsLibrary.SET_CLIENTS,
           payload: { ...searchControlsState, clients: clients },
+          //In dispatch send a payload which keeps all other states the same and only sends the new "clients" information we want to update
         });
         dispatch({
           type: searchControlsActionsLibrary.SET_EMPLOYEES,
@@ -34,14 +35,22 @@ export function SearchControls({
         });
       }
       storeClientsAndEmployees();
+      // Return iniital state to fix memory leak unmounted component "Can't performa a React state update on an umounted component"
+      return () => {
+        dispatch({ type: "DEFAULT", payload: { ...searchControlsState } });
+      };
     },
     //Disabling as it is saying to put clients,projects and employees in which would cause an infinite loop
     //eslint-disable-next-line
     []
   );
 
-  console.log(searchControlsState.clients);
-  console.log(searchControlsState.employees);
+  const clientNames = searchControlsState.clients.map((client) => client.name);
+  const employeeNames = searchControlsState.employees.map(
+    (employee) => employee.name
+  );
+  console.log(clientNames);
+  console.log(employeeNames);
 
   return (
     <>

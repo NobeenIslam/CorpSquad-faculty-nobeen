@@ -1,6 +1,7 @@
 import { ClientInterface, EmployeeInterface } from "../Interfaces";
 
 export const searchControlsActionsLibrary = {
+  DEFAULT: "DEFAULT",
   SET_CLIENTS: "SET_CLIENTS",
   SET_EMPLOYEES: "SET_EMPLOYEES",
 };
