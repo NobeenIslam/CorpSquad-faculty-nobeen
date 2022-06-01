@@ -57,14 +57,22 @@ export function SearchControls({
   const clientNames = searchControlsState.clients
     .map((client) => client.name)
     .sort();
-  // const employeeNames = searchControlsState.employees
-  //   .map((employee) => employee.name)
-  //   .sort();
+  const employeeNames = searchControlsState.employees
+    .map((employee) => employee.name)
+    .sort();
 
   const clientNamesOptions: JSX.Element[] = clientNames.map(
     (clientName, index) => (
       <option key={index} value={clientName}>
         {clientName}
+      </option>
+    )
+  );
+
+  const employeeNamesOptions: JSX.Element[] = employeeNames.map(
+    (employeeName, index) => (
+      <option key={index} value={employeeName}>
+        {employeeName}
       </option>
     )
   );
@@ -83,6 +91,19 @@ export function SearchControls({
       >
         <option>Select a Client...</option>
         {clientNamesOptions}
+      </select>
+      <select
+        value={dashboardState.employeeSearch}
+        onChange={(e) => {
+          dashboardDispatch({
+            type: dashboardActionsLibrary.SET_EMPLOYEE_SEARCH,
+            payload: { ...dashboardState, employeeSearch: e.target.value },
+            //Send a payload which keeps all other states the same but updates clientSearch according to the selected option value
+          });
+        }}
+      >
+        <option>Select an Employee...</option>
+        {employeeNamesOptions}
       </select>
     </>
   );
