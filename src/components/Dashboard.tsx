@@ -14,7 +14,7 @@ import {
 } from "../utils/Interfaces";
 import { sumAllRevenues } from "../utils/unitFunctions/sumAllRevenues";
 import { ProjectCard } from "./ProjectCard";
-import { SearchControls } from "./SearchControls";
+import { FilterControls } from "./FilterControls";
 import {
   dashboardActionsLibrary,
   dashboardReducer,
@@ -89,7 +89,7 @@ export function Dashboard(): JSX.Element {
       <main className="mainContent">
         <h1 className="title">Aggregate Revenue: £{aggregateRevenue}</h1>
         <div>Projects Found: {filteredProjects.length}</div>
-        <SearchControls
+        <FilterControls
           dashboardState={dashboardState}
           dashboardDispatch={dashboardDispatch}
         />

@@ -5,24 +5,24 @@ import {
   DashboardState,
 } from "../utils/reducerStateManagement/dashboardManager";
 import {
-  searchControlsreducer,
-  initialSearchControlsState,
-  searchControlsActionsLibrary,
-} from "../utils/reducerStateManagement/searchControlsManager";
+  filterControlsreducer,
+  initialFilterControlsState,
+  filterControlsActionsLibrary,
+} from "../utils/reducerStateManagement/filterControlsManager";
 import { fetchClients, fetchEmployees } from "../utils/unitFunctions/fetchData";
 
-interface SearchControlsProps {
+interface FilterControlsProps {
   dashboardState: DashboardState;
   dashboardDispatch: React.Dispatch<DashboardActions>;
 }
 
-export function SearchControls({
+export function FilterControls({
   dashboardState,
   dashboardDispatch,
-}: SearchControlsProps): JSX.Element {
-  const [searchControlsState, searchControlsDispatch] = useReducer(
-    searchControlsreducer,
-    initialSearchControlsState
+}: FilterControlsProps): JSX.Element {
+  const [filterControlsState, filterControlsDispatch] = useReducer(
+    filterControlsreducer,
+    initialFilterControlsState
   );
 
   useEffect(
@@ -30,22 +30,22 @@ export function SearchControls({
       async function storeClientsAndEmployees() {
         const clients = await fetchClients();
         const employees = await fetchEmployees();
-        searchControlsDispatch({
-          type: searchControlsActionsLibrary.SET_CLIENTS,
-          payload: { ...searchControlsState, clients: clients },
+        filterControlsDispatch({
+          type: filterControlsActionsLibrary.SET_CLIENTS,
+          payload: { ...filterControlsState, clients: clients },
           //In dispatch send a payload which keeps all other states the same and only sends the new "clients" information we want to update
         });
-        searchControlsDispatch({
-          type: searchControlsActionsLibrary.SET_EMPLOYEES,
-          payload: { ...searchControlsState, employees: employees },
+        filterControlsDispatch({
+          type: filterControlsActionsLibrary.SET_EMPLOYEES,
+          payload: { ...filterControlsState, employees: employees },
         });
       }
       storeClientsAndEmployees();
       // Return iniital state to fix memory leak unmounted component "Can't performa a React state update on an umounted component"
       return () => {
-        searchControlsDispatch({
-          type: searchControlsActionsLibrary.DEFAULT, //enters the default case of the switch
-          payload: { ...searchControlsState },
+        filterControlsDispatch({
+          type: filterControlsActionsLibrary.DEFAULT, //enters the default case of the switch
+          payload: { ...filterControlsState },
         });
       };
     },
@@ -54,11 +54,11 @@ export function SearchControls({
     []
   );
 
-  const clientNames = searchControlsState.clients
+  const clientNames = filterControlsState.clients
     .map((client) => client.name)
     .sort();
 
-  const employeeNames = searchControlsState.employees
+  const employeeNames = filterControlsState.employees
     .map((employee) => employee.name)
     .sort();
 

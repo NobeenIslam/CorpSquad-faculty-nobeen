@@ -1,35 +1,35 @@
 import { ClientInterface, EmployeeInterface } from "../Interfaces";
 
-export const searchControlsActionsLibrary = {
+export const filterControlsActionsLibrary = {
   DEFAULT: "DEFAULT",
   SET_CLIENTS: "SET_CLIENTS",
   SET_EMPLOYEES: "SET_EMPLOYEES",
 };
 
-export const initialSearchControlsState = {
+export const initialFilterControlsState = {
   clients: [],
   employees: [],
 };
 
-export interface SearchControlsState {
+export interface FilterControlsState {
   clients: ClientInterface[];
   employees: EmployeeInterface[];
 }
 
-export interface SearchControlsActions {
+export interface FilterControlsActions {
   type: string;
-  payload: SearchControlsState;
+  payload: FilterControlsState;
 }
 
-export function searchControlsreducer(
-  state: SearchControlsState,
-  action: SearchControlsActions
-): SearchControlsState {
+export function filterControlsreducer(
+  state: FilterControlsState,
+  action: FilterControlsActions
+): FilterControlsState {
   switch (action.type) {
-    case searchControlsActionsLibrary.SET_CLIENTS: {
+    case filterControlsActionsLibrary.SET_CLIENTS: {
       return { ...state, clients: action.payload.clients };
     }
-    case searchControlsActionsLibrary.SET_EMPLOYEES: {
+    case filterControlsActionsLibrary.SET_EMPLOYEES: {
       return { ...state, employees: action.payload.employees };
     }
     default: {
