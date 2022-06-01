@@ -22,7 +22,7 @@ import {
 } from "../utils/reducerStateManagement/dashboardManager";
 
 export function Dashboard(): JSX.Element {
-  const [dashboardState, dispatch] = useReducer(
+  const [dashboardState, dashboardDispatch] = useReducer(
     dashboardReducer,
     initialDashboardState
   );
@@ -36,7 +36,7 @@ export function Dashboard(): JSX.Element {
       const projectsWithAllInfo: ProjectInterfaceWithAllData[] =
         addAllDataToProjects(projects, clients, employees);
 
-      dispatch({
+      dashboardDispatch({
         type: dashboardActionsLibrary.SET_PROJECTS,
         payload: { ...dashboardState, projects: projectsWithAllInfo },
       });
@@ -48,7 +48,20 @@ export function Dashboard(): JSX.Element {
     //eslint-disable-next-line
   }, []);
 
-  const projectCards: JSX.Element[] = dashboardState.projects.map((project) => (
+  const aggregateRevenue = sumAllRevenues(dashboardState.projects);
+  let filteredProjects: ProjectInterfaceWithAllData[] = [];
+  if (dashboardState.clientSearch === "default") {
+    console.log("default");
+    filteredProjects = dashboardState.projects;
+  } else {
+    console.log("not default");
+    filteredProjects = dashboardState.projects.filter(
+      (project) => project.clientName === dashboardState.clientSearch
+    );
+  }
+  console.log(filteredProjects);
+
+  const projectCards: JSX.Element[] = filteredProjects.map((project) => (
     <ProjectCard
       key={project.id}
       project={project}
@@ -56,12 +69,14 @@ export function Dashboard(): JSX.Element {
     />
   ));
 
-  const aggregateRevenue = sumAllRevenues(dashboardState.projects);
   return (
     <>
       <main className="mainContent">
         <h1 className="title">Aggregate Revenue: £{aggregateRevenue}</h1>
-        <SearchControls dashboardState={dashboardState} />
+        <SearchControls
+          dashboardState={dashboardState}
+          dashboardDispatch={dashboardDispatch}
+        />
         <section className="dashboard">{projectCards}</section>
       </main>
     </>

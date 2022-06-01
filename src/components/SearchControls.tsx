@@ -1,5 +1,9 @@
 import { useEffect, useReducer } from "react";
-import { DashboardState } from "../utils/reducerStateManagement/dashboardManager";
+import {
+  DashboardActions,
+  dashboardActionsLibrary,
+  DashboardState,
+} from "../utils/reducerStateManagement/dashboardManager";
 import {
   searchControlsreducer,
   initialSearchControlsState,
@@ -9,12 +13,14 @@ import { fetchClients, fetchEmployees } from "../utils/unitFunctions/fetchData";
 
 interface SearchControlsProps {
   dashboardState: DashboardState;
+  dashboardDispatch: React.Dispatch<DashboardActions>;
 }
 
 export function SearchControls({
   dashboardState,
+  dashboardDispatch,
 }: SearchControlsProps): JSX.Element {
-  const [searchControlsState, dispatch] = useReducer(
+  const [searchControlsState, searchControlsDispatch] = useReducer(
     searchControlsreducer,
     initialSearchControlsState
   );
@@ -24,12 +30,12 @@ export function SearchControls({
       async function storeClientsAndEmployees() {
         const clients = await fetchClients();
         const employees = await fetchEmployees();
-        dispatch({
+        searchControlsDispatch({
           type: searchControlsActionsLibrary.SET_CLIENTS,
           payload: { ...searchControlsState, clients: clients },
           //In dispatch send a payload which keeps all other states the same and only sends the new "clients" information we want to update
         });
-        dispatch({
+        searchControlsDispatch({
           type: searchControlsActionsLibrary.SET_EMPLOYEES,
           payload: { ...searchControlsState, employees: employees },
         });
@@ -37,7 +43,10 @@ export function SearchControls({
       storeClientsAndEmployees();
       // Return iniital state to fix memory leak unmounted component "Can't performa a React state update on an umounted component"
       return () => {
-        dispatch({ type: "DEFAULT", payload: { ...searchControlsState } });
+        searchControlsDispatch({
+          type: "DEFAULT",
+          payload: { ...searchControlsState },
+        });
       };
     },
     //Disabling as it is saying to put clients,projects and employees in which would cause an infinite loop
@@ -48,9 +57,9 @@ export function SearchControls({
   const clientNames = searchControlsState.clients
     .map((client) => client.name)
     .sort();
-  const employeeNames = searchControlsState.employees
-    .map((employee) => employee.name)
-    .sort();
+  // const employeeNames = searchControlsState.employees
+  //   .map((employee) => employee.name)
+  //   .sort();
 
   const clientNamesOptions: JSX.Element[] = clientNames.map(
     (clientName, index) => (
@@ -59,13 +68,23 @@ export function SearchControls({
       </option>
     )
   );
-  console.log(clientNames);
-  console.log(employeeNames);
 
   return (
     <>
       <div>Project Count: {dashboardState.projects.length} </div>
-      <select>{clientNamesOptions}</select>
+      <select
+        value={dashboardState.clientSearch}
+        onChange={(e) => {
+          dashboardDispatch({
+            type: dashboardActionsLibrary.SET_CLIENT_SEARCH,
+            payload: { ...dashboardState, clientSearch: e.target.value },
+            //Send a payload which keeps all other states the same but updates clientSearch according to the selected option value
+          });
+        }}
+      >
+        <option defaultValue={"default"}>Select a Client...</option>
+        {clientNamesOptions}
+      </select>
     </>
   );
 }

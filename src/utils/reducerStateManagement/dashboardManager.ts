@@ -30,7 +30,7 @@ export function dashboardReducer(
       return { ...state, projects: action.payload.projects }; //Keep all other state variables the same and only update projects
     }
     case dashboardActionsLibrary.SET_CLIENT_SEARCH: {
-      return { ...state, clientSearch: "test" };
+      return { ...state, clientSearch: action.payload.clientSearch };
     }
     default: {
       return state;
