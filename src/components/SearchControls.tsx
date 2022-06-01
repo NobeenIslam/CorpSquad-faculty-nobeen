@@ -71,7 +71,6 @@ export function SearchControls({
 
   return (
     <>
-      <div>Project Count: {dashboardState.projects.length} </div>
       <select
         value={dashboardState.clientSearch}
         onChange={(e) => {

@@ -58,7 +58,6 @@ export function Dashboard(): JSX.Element {
       (project) => project.clientName === dashboardState.clientSearch
     );
   }
-  console.log(filteredProjects);
 
   const projectCards: JSX.Element[] = filteredProjects.map((project) => (
     <ProjectCard
@@ -72,6 +71,7 @@ export function Dashboard(): JSX.Element {
     <>
       <main className="mainContent">
         <h1 className="title">Aggregate Revenue: £{aggregateRevenue}</h1>
+        <div>Projects Found: {filteredProjects.length}</div>
         <SearchControls
           dashboardState={dashboardState}
           dashboardDispatch={dashboardDispatch}
