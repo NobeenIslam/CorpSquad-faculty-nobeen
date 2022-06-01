@@ -44,7 +44,7 @@ export function SearchControls({
       // Return iniital state to fix memory leak unmounted component "Can't performa a React state update on an umounted component"
       return () => {
         searchControlsDispatch({
-          type: "DEFAULT",
+          type: searchControlsActionsLibrary.DEFAULT, //enters the default case of the switch
           payload: { ...searchControlsState },
         });
       };
@@ -82,7 +82,7 @@ export function SearchControls({
           });
         }}
       >
-        <option defaultValue={"default"}>Select a Client...</option>
+        <option>Select a Client...</option>
         {clientNamesOptions}
       </select>
     </>

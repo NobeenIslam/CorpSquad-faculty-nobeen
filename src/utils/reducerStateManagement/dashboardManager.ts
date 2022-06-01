@@ -8,7 +8,7 @@ export const dashboardActionsLibrary = {
 
 export const initialDashboardState: DashboardState = {
   projects: [],
-  clientSearch: "",
+  clientSearch: "Select a Client...",
 };
 
 export interface DashboardState {

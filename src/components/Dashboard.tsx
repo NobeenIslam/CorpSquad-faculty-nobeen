@@ -26,7 +26,6 @@ export function Dashboard(): JSX.Element {
     dashboardReducer,
     initialDashboardState
   );
-
   useEffect(() => {
     async function fetchAllData() {
       const projects: ProjectInterface[] = await fetchProjects();
@@ -48,13 +47,13 @@ export function Dashboard(): JSX.Element {
     //eslint-disable-next-line
   }, []);
 
+  console.log(dashboardState.clientSearch);
+
   const aggregateRevenue = sumAllRevenues(dashboardState.projects);
-  let filteredProjects: ProjectInterfaceWithAllData[] = [];
-  if (dashboardState.clientSearch === "default") {
-    console.log("default");
-    filteredProjects = dashboardState.projects;
-  } else {
-    console.log("not default");
+
+  let filteredProjects: ProjectInterfaceWithAllData[] = dashboardState.projects;
+
+  if (dashboardState.clientSearch !== "Select a Client...") {
     filteredProjects = dashboardState.projects.filter(
       (project) => project.clientName === dashboardState.clientSearch
     );
