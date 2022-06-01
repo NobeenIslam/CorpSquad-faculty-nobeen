@@ -2,7 +2,7 @@ import {
   ClientInterface,
   ProjectInterface,
   ProjectInterfaceWithClientName,
-} from "./Interfaces";
+} from "../Interfaces";
 
 /**
  * Adds clientName to each project object in the array based on the clientID.

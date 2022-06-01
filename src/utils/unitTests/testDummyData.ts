@@ -1,7 +1,7 @@
 import {
   ProjectInterfaceWithAllData,
   ProjectInterfaceWithClientName,
-} from "./Interfaces";
+} from "../Interfaces";
 
 export const testProjects = [
   {

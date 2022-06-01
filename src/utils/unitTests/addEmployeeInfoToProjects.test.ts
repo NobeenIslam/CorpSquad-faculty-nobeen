@@ -1,4 +1,4 @@
-import { addEmployeeInfoToProjects } from "./addEmployeeInfoToProjects";
+import { addEmployeeInfoToProjects } from "../unitFunctions/addEmployeeInfoToProjects";
 import {
   testEmployees,
   testProjectsWithClientNames,

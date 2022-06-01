@@ -1,6 +1,6 @@
 import { useEffect, useReducer } from "react";
 import { ClientInterface, EmployeeInterface, State } from "../utils/Interfaces";
-import { fetchClients, fetchEmployees } from "../utils/fetchData";
+import { fetchClients, fetchEmployees } from "../utils/unitFunctions/fetchData";
 interface SearchControlsProps {
   state: State;
 }

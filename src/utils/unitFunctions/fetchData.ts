@@ -2,7 +2,7 @@ import {
   ProjectInterface,
   ClientInterface,
   EmployeeInterface,
-} from "./Interfaces";
+} from "../Interfaces";
 
 /**
  * Fetch projects

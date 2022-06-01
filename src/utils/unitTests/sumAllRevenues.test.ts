@@ -1,4 +1,4 @@
-import { sumAllRevenues } from "./sumAllRevenues";
+import { sumAllRevenues } from "../unitFunctions/sumAllRevenues";
 import { testProjectsWithAllData } from "./testDummyData";
 
 test("Sums all revenues from contract in projects", () => {

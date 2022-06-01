@@ -1,11 +1,11 @@
 import { useEffect, useReducer } from "react";
-import { addAllDataToProjects } from "../utils/addAllDataToProjects";
+import { addAllDataToProjects } from "../utils/unitFunctions/addAllDataToProjects";
 
 import {
   fetchProjects,
   fetchClients,
   fetchEmployees,
-} from "../utils/fetchData";
+} from "../utils/unitFunctions/fetchData";
 import {
   ClientInterface,
   EmployeeInterface,
@@ -13,7 +13,7 @@ import {
   ProjectInterfaceWithAllData,
   State,
 } from "../utils/Interfaces";
-import { sumAllRevenues } from "../utils/sumAllRevenues";
+import { sumAllRevenues } from "../utils/unitFunctions/sumAllRevenues";
 import { ProjectCard } from "./ProjectCard";
 import { SearchControls } from "./SearchControls";
 

@@ -3,7 +3,7 @@ import {
   EmployeeInterface,
   ProjectInterfaceWithAllData,
   ProjectInterfaceWithClientName,
-} from "./Interfaces";
+} from "../Interfaces";
 
 /**
  * Takes a mofified projects array, which already has clientNames added and appends the full employee infos of the employees that
