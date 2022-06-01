@@ -22,7 +22,13 @@ export function ClientProfile(): JSX.Element {
   );
 
   const thisClientsEmployeeTokens: JSX.Element[] = thisClientsEmployees.map(
-    (employee) => <EmployeeToken key={employee.id} employee={employee} />
+    (employee) => (
+      <EmployeeToken
+        key={employee.id}
+        employee={employee}
+        projects={projects}
+      />
+    )
   );
 
   return (

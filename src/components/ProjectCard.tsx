@@ -12,7 +12,7 @@ export function ProjectCard({
   projects,
 }: ProjectCardProps): JSX.Element {
   const employeeTokens: JSX.Element[] = project.employees.map((employee) => (
-    <EmployeeToken key={employee.id} employee={employee} />
+    <EmployeeToken key={employee.id} employee={employee} projects={projects} />
   ));
 
   return (
