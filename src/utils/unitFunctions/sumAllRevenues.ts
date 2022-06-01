@@ -1,4 +1,4 @@
-import { ProjectInterfaceWithAllData } from "./Interfaces";
+import { ProjectInterfaceWithAllData } from "../Interfaces";
 
 /**
  * This function iterates through projects and their contracts and sums all the revenues

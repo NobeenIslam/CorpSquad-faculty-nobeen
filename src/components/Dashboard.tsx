@@ -1,48 +1,31 @@
 import { useEffect, useReducer } from "react";
-import { addAllDataToProjects } from "../utils/addAllDataToProjects";
+import { addAllDataToProjects } from "../utils/unitFunctions/addAllDataToProjects";
 
 import {
   fetchProjects,
   fetchClients,
   fetchEmployees,
-} from "../utils/fetchData";
+} from "../utils/unitFunctions/fetchData";
 import {
   ClientInterface,
   EmployeeInterface,
   ProjectInterface,
   ProjectInterfaceWithAllData,
 } from "../utils/Interfaces";
-import { sumAllRevenues } from "../utils/sumAllRevenues";
+import { sumAllRevenues } from "../utils/unitFunctions/sumAllRevenues";
 import { ProjectCard } from "./ProjectCard";
-
-interface Action {
-  type: string;
-  newProjects: ProjectInterfaceWithAllData[];
-}
-
-interface State {
-  projects: ProjectInterfaceWithAllData[];
-}
-
-function reducer(state: State, action: Action) {
-  switch (action.type) {
-    case "ADD_ALL_DATA": {
-      const newState = { projects: action.newProjects };
-      return newState;
-    }
-    default: {
-      return state;
-    }
-  }
-}
+import { SearchControls } from "./SearchControls";
+import {
+  dashboardActionsLibrary,
+  dashboardReducer,
+  initialDashboardState,
+} from "../utils/reducerStateManagement/dashboardManager";
 
 export function Dashboard(): JSX.Element {
-  //Declared as an object incase more states will be need in the future
-  const initialState: State = {
-    projects: [],
-  };
-  const [state, dispatch] = useReducer(reducer, initialState);
-
+  const [dashboardState, dashboardDispatch] = useReducer(
+    dashboardReducer,
+    initialDashboardState
+  );
   useEffect(() => {
     async function fetchAllData() {
       const projects: ProjectInterface[] = await fetchProjects();
@@ -52,7 +35,11 @@ export function Dashboard(): JSX.Element {
       const projectsWithAllInfo: ProjectInterfaceWithAllData[] =
         addAllDataToProjects(projects, clients, employees);
 
-      dispatch({ type: "ADD_ALL_DATA", newProjects: projectsWithAllInfo });
+      dashboardDispatch({
+        type: dashboardActionsLibrary.SET_PROJECTS,
+        payload: { ...dashboardState, projects: projectsWithAllInfo },
+      });
+      //In dispatch send a payload which keeps all other states the same and only sends the new "projects" information we want to update
     }
 
     fetchAllData();
@@ -60,15 +47,35 @@ export function Dashboard(): JSX.Element {
     //eslint-disable-next-line
   }, []);
 
-  const projectCards: JSX.Element[] = state.projects.map((project) => (
-    <ProjectCard key={project.id} project={project} projects={state.projects} />
+  console.log(dashboardState.clientSearch);
+
+  const aggregateRevenue = sumAllRevenues(dashboardState.projects);
+
+  let filteredProjects: ProjectInterfaceWithAllData[] = dashboardState.projects;
+
+  if (dashboardState.clientSearch !== "Select a Client...") {
+    filteredProjects = dashboardState.projects.filter(
+      (project) => project.clientName === dashboardState.clientSearch
+    );
+  }
+
+  const projectCards: JSX.Element[] = filteredProjects.map((project) => (
+    <ProjectCard
+      key={project.id}
+      project={project}
+      projects={dashboardState.projects}
+    />
   ));
 
-  const aggregateRevenue = sumAllRevenues(state.projects);
   return (
     <>
       <main className="mainContent">
         <h1 className="title">Aggregate Revenue: £{aggregateRevenue}</h1>
+        <div>Projects Found: {filteredProjects.length}</div>
+        <SearchControls
+          dashboardState={dashboardState}
+          dashboardDispatch={dashboardDispatch}
+        />
         <section className="dashboard">{projectCards}</section>
       </main>
     </>

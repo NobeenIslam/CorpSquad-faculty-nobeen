@@ -1,4 +1,4 @@
-import { EmployeeInterface, ProjectInterfaceWithAllData } from "./Interfaces";
+import { EmployeeInterface, ProjectInterfaceWithAllData } from "../Interfaces";
 
 /**
  * This function is expected to be run in Client Profile to get all the employees that have worked for a specific client

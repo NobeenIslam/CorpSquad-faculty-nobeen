@@ -6,7 +6,7 @@ import {
   ProjectInterface,
   ProjectInterfaceWithAllData,
   ProjectInterfaceWithClientName,
-} from "./Interfaces";
+} from "../Interfaces";
 
 /**
  * Takes projects and adds all additional information (client names and all employee information
