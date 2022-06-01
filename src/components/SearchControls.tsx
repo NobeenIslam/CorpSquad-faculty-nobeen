@@ -45,9 +45,19 @@ export function SearchControls({
     []
   );
 
-  const clientNames = searchControlsState.clients.map((client) => client.name);
-  const employeeNames = searchControlsState.employees.map(
-    (employee) => employee.name
+  const clientNames = searchControlsState.clients
+    .map((client) => client.name)
+    .sort();
+  const employeeNames = searchControlsState.employees
+    .map((employee) => employee.name)
+    .sort();
+
+  const clientNamesOptions: JSX.Element[] = clientNames.map(
+    (clientName, index) => (
+      <option key={index} value={clientName}>
+        {clientName}
+      </option>
+    )
   );
   console.log(clientNames);
   console.log(employeeNames);
@@ -55,9 +65,7 @@ export function SearchControls({
   return (
     <>
       <div>Project Count: {dashboardState.projects.length} </div>
-      <select>
-        <option></option>
-      </select>
+      <select>{clientNamesOptions}</select>
     </>
   );
 }
