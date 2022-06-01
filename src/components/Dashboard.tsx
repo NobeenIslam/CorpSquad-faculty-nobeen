@@ -48,7 +48,6 @@ export function Dashboard(): JSX.Element {
     //eslint-disable-next-line
   }, []);
 
-  console.log(dashboardState.employeeSearch);
 
   const aggregateRevenue = sumAllRevenues(dashboardState.projects);
 
