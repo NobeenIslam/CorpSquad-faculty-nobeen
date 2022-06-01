@@ -48,7 +48,6 @@ export function Dashboard(): JSX.Element {
     //eslint-disable-next-line
   }, []);
 
-
   const aggregateRevenue = sumAllRevenues(dashboardState.projects);
 
   let filteredProjects: ProjectInterfaceWithAllData[] = dashboardState.projects;
