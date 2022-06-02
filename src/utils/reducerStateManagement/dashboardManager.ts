@@ -12,15 +12,16 @@ export const dashboardActionsLibrary = {
   SET_BEFORE_END_DATE_SEARCH: "SET_BEFORE_END_DATE_SEARCH",
 };
 
+//endDate searches are initialised empty strings because when you "clear" on the date picker it sets the value to empty ""
 export const initialDashboardState: DashboardState = {
   projects: [],
   clientSearch: "Select a Client...",
   employeeSearch: "Select an Employee...",
   dateSortToggles: ["active", "inactive", "inactive", "inactive"],
-  afterStartDateSearch: "default",
-  beforeStartDateSearch: "default",
-  afterEndDateSearch: "default",
-  beforeEndDateSearch: "default",
+  afterStartDateSearch: "",
+  beforeStartDateSearch: "",
+  afterEndDateSearch: "",
+  beforeEndDateSearch: "",
 };
 
 export interface DashboardState {

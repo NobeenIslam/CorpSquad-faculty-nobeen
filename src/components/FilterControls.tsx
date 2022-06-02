@@ -113,13 +113,51 @@ export function FilterControls({
         dashboardDispatch={dashboardDispatch}
       />
       <div>After Start-Date</div>
-      <input type="date" onChange={(e) => console.log(e.target.value)}></input>
+      <input
+        type="date"
+        onChange={(e) => {
+          dashboardDispatch({
+            type: dashboardActionsLibrary.SET_AFTER_START_DATE_SEARCH,
+            payload: {
+              ...dashboardState,
+              afterStartDateSearch: e.target.value,
+            },
+          });
+        }}
+      ></input>
       <div>Before Start-Date</div>
-      <input type="date" onChange={(e) => console.log(e.target.value)}></input>
+      <input
+        type="date"
+        onChange={(e) => {
+          dashboardDispatch({
+            type: dashboardActionsLibrary.SET_BEFORE_START_DATE_SEARCH,
+            payload: {
+              ...dashboardState,
+              beforeStartDateSearch: e.target.value,
+            },
+          });
+        }}
+      ></input>
       <div>After End-Date</div>
-      <input type="date" onChange={(e) => console.log(e.target.value)}></input>
+      <input
+        type="date"
+        onChange={(e) => {
+          dashboardDispatch({
+            type: dashboardActionsLibrary.SET_AFTER_END_DATE_SEARCH,
+            payload: { ...dashboardState, afterEndDateSearch: e.target.value },
+          });
+        }}
+      ></input>
       <div>Before End-Date</div>
-      <input type="date" onChange={(e) => console.log(e.target.value)}></input>
+      <input
+        type="date"
+        onChange={(e) => {
+          dashboardDispatch({
+            type: dashboardActionsLibrary.SET_BEFORE_END_DATE_SEARCH,
+            payload: { ...dashboardState, beforeEndDateSearch: e.target.value },
+          });
+        }}
+      ></input>
     </>
   );
 }
