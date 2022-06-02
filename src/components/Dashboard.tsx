@@ -142,9 +142,7 @@ export function Dashboard(): JSX.Element {
     const afterSearchTime = new Date(dashboardState.afterStartDateSearch);
     const beforeSearchTime = new Date(dashboardState.beforeStartDateSearch);
     if (afterSearchTime > beforeSearchTime) {
-      window.alert(
-        "Started After filter must be less that Started Before! Please select again"
-      );
+      window.alert("Chronological Conflict! Please select your filters again");
       dashboardDispatch({
         type: dashboardActionsLibrary.SET_BEFORE_START_DATE_SEARCH,
         payload: { ...dashboardState, beforeStartDateSearch: "" },
@@ -173,9 +171,7 @@ export function Dashboard(): JSX.Element {
     const afterSearchTime = new Date(dashboardState.afterEndDateSearch);
     const beforeSearchTime = new Date(dashboardState.beforeEndDateSearch);
     if (afterSearchTime > beforeSearchTime) {
-      window.alert(
-        "Ended After filter must be less that Ended Before! Please select again"
-      );
+      window.alert("Chronological Conflict! Please select your filters again");
       dashboardDispatch({
         type: dashboardActionsLibrary.SET_BEFORE_END_DATE_SEARCH,
         payload: { ...dashboardState, beforeEndDateSearch: "" },

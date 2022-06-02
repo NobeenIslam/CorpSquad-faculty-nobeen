@@ -13,6 +13,7 @@ export const dashboardActionsLibrary = {
   SET_REVENUE_SORT: "SET_REVENUE_SORT",
   SET_GREATER_REVENUE_SEARCH: "SET_GREATER_REVENUE_SEARCH",
   SET_LESSER_REVENUE_SEARCH: "SET_LESSER_REVENUE_SEARCH",
+  RESET_FITLERS: "RESET_FILTERS",
 };
 
 export interface DashboardState {
@@ -113,6 +114,13 @@ export function dashboardReducer(
         ...state,
         lesserRevenueSearch: action.payload.lesserRevenueSearch,
       };
+    }
+    case dashboardActionsLibrary.RESET_FITLERS: {
+      const resetSate = {
+        ...initialDashboardState,
+        projects: action.payload.projects,
+      }; //Reset all filters but keep projects as the full array we're working with
+      return resetSate;
     }
     default: {
       return state;
