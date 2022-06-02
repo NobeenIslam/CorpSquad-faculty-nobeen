@@ -14,7 +14,11 @@ import {
 } from "../utils/Interfaces";
 import { sumAllRevenues } from "../utils/unitFunctions/sumAllRevenues";
 import { ProjectCard } from "./ProjectCard";
-import { FilterControls } from "./FilterControls";
+import {
+  activateSortRevenueAscending,
+  activateSortRevenueDescending,
+  FilterControls,
+} from "./FilterControls";
 import {
   dashboardActionsLibrary,
   dashboardReducer,
@@ -38,6 +42,10 @@ import {
   filterByClient,
   filterByEmployee,
 } from "../utils/unitFunctions/filterFunctions";
+import {
+  sortRevenueAscending,
+  sortRevenueDescending,
+} from "../utils/unitFunctions/sortRevenueFunctions";
 
 export function Dashboard(): JSX.Element {
   const [dashboardState, dashboardDispatch] = useReducer(
@@ -86,6 +94,17 @@ export function Dashboard(): JSX.Element {
     );
   } else if (dashboardState.dateSortToggles === activateOldestEndDate) {
     filteredProjects.sort((proj1, proj2) => oldestEndDateFirst(proj1, proj2));
+  }
+
+  //SORT BY REVENUE
+  if (dashboardState.revenueSortToggles === activateSortRevenueAscending) {
+    filteredProjects.sort((proj1, proj2) => sortRevenueAscending(proj1, proj2));
+  } else if (
+    dashboardState.revenueSortToggles === activateSortRevenueDescending
+  ) {
+    filteredProjects.sort((proj1, proj2) =>
+      sortRevenueDescending(proj1, proj2)
+    );
   }
 
   //FILTERBY Date

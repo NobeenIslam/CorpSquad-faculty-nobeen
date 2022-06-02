@@ -19,6 +19,9 @@ interface FilterControlsProps {
   dashboardDispatch: React.Dispatch<DashboardActions>;
 }
 
+export const activateSortRevenueAscending = ["active", "inactive"];
+export const activateSortRevenueDescending = ["inactive", "active"];
+
 export function FilterControls({
   dashboardState,
   dashboardDispatch,
@@ -73,9 +76,6 @@ export function FilterControls({
       </option>
     )
   );
-
-  const activateSortRevenueAscending = ["active", "inactive"];
-  const activateSortRevenueDescending = ["inactive", "active"];
 
   function handleSortByRevenue(activateSort: string[]) {
     dashboardDispatch({

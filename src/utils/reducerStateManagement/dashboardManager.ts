@@ -91,6 +91,7 @@ export function dashboardReducer(
     case dashboardActionsLibrary.SET_REVENUE_SORT: {
       return {
         ...state,
+        dateSortToggles: action.payload.dateSortToggles,
         revenueSortToggles: action.payload.revenueSortToggles,
       };
     }
