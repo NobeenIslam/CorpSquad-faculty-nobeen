@@ -64,11 +64,45 @@ export function Dashboard(): JSX.Element {
 
   const aggregateRevenue = sumAllRevenues(dashboardState.projects);
 
-  //order by startDate by default
+  //order by by most recentstartDate by default
   let filteredProjects: ProjectInterfaceWithAllData[] =
     dashboardState.projects.sort((proj1, proj2) =>
       mostRecentStartDateFirst(proj1, proj2)
     );
+
+  //SORT BY DATE
+  //Sort by most recent start date is DEFAULT
+  if (dashboardState.dateSortToggles === activateOldestStartDate) {
+    filteredProjects.sort((proj1, proj2) => oldestStartDateFirst(proj1, proj2));
+  } else if (dashboardState.dateSortToggles === activateMostRecentEndDate) {
+    filteredProjects.sort((proj1, proj2) =>
+      mostRecentEndDateFirst(proj1, proj2)
+    );
+  } else if (dashboardState.dateSortToggles === activateOldestEndDate) {
+    filteredProjects.sort((proj1, proj2) => oldestEndDateFirst(proj1, proj2));
+  }
+
+  //FILTERBY Date
+
+  if (dashboardState.afterStartDateSearch !== "") {
+    filteredProjects = filteredProjects.filter((project) => {
+      const projectStartTime = new Date(project.contract.startDate).getTime();
+      const searchTime = new Date(
+        dashboardState.afterStartDateSearch
+      ).getTime();
+      return projectStartTime > searchTime;
+    });
+  }
+
+  if (dashboardState.beforeStartDateSearch !== "") {
+    filteredProjects = filteredProjects.filter((project) => {
+      const projectStartTime = new Date(project.contract.startDate).getTime();
+      const searchTime = new Date(
+        dashboardState.beforeStartDateSearch
+      ).getTime();
+      return projectStartTime < searchTime;
+    });
+  }
 
   //FITLER BY CLIENT
   if (dashboardState.clientSearch !== "Select a Client...") {
@@ -89,18 +123,6 @@ export function Dashboard(): JSX.Element {
     filteredProjects = filteredProjects.filter((project) =>
       doesProjectIncludeEmployee(project)
     );
-  }
-
-  //SORT BY DATE
-  //Sort by most recent start date is DEFAULT
-  if (dashboardState.dateSortToggles === activateOldestStartDate) {
-    filteredProjects.sort((proj1, proj2) => oldestStartDateFirst(proj1, proj2));
-  } else if (dashboardState.dateSortToggles === activateMostRecentEndDate) {
-    filteredProjects.sort((proj1, proj2) =>
-      mostRecentEndDateFirst(proj1, proj2)
-    );
-  } else if (dashboardState.dateSortToggles === activateOldestEndDate) {
-    filteredProjects.sort((proj1, proj2) => oldestEndDateFirst(proj1, proj2));
   }
 
   const projectCards: JSX.Element[] = filteredProjects.map((project) => (
