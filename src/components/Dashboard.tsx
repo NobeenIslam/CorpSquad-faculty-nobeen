@@ -32,6 +32,9 @@ import {
   activateOldestStartDate,
 } from "./DateSortButtons";
 import {
+  filterByAfterStartDate,
+  filterByBeforeEndDate,
+  filterByBeforeStartDate,
   filterByClient,
   filterByEmployee,
 } from "../utils/unitFunctions/filterFunctions";
@@ -88,23 +91,17 @@ export function Dashboard(): JSX.Element {
   //FILTERBY Date
 
   if (dashboardState.afterStartDateSearch !== "") {
-    filteredProjects = filteredProjects.filter((project) => {
-      const projectStartTime = new Date(project.contract.startDate).getTime();
-      const searchTime = new Date(
-        dashboardState.afterStartDateSearch
-      ).getTime();
-      return projectStartTime > searchTime;
-    });
+    filteredProjects = filterByAfterStartDate(
+      dashboardState.afterStartDateSearch,
+      filteredProjects
+    );
   }
 
   if (dashboardState.beforeStartDateSearch !== "") {
-    filteredProjects = filteredProjects.filter((project) => {
-      const projectStartTime = new Date(project.contract.startDate).getTime();
-      const searchTime = new Date(
-        dashboardState.beforeStartDateSearch
-      ).getTime();
-      return projectStartTime < searchTime;
-    });
+    filteredProjects = filterByBeforeStartDate(
+      dashboardState.beforeStartDateSearch,
+      filteredProjects
+    );
   }
 
   if (
@@ -125,19 +122,17 @@ export function Dashboard(): JSX.Element {
   }
 
   if (dashboardState.afterEndDateSearch !== "") {
-    filteredProjects = filteredProjects.filter((project) => {
-      const projectEndTime = new Date(project.contract.endDate).getTime();
-      const searchTime = new Date(dashboardState.afterEndDateSearch).getTime();
-      return projectEndTime > searchTime;
-    });
+    filteredProjects = filterByAfterStartDate(
+      dashboardState.afterEndDateSearch,
+      filteredProjects
+    );
   }
 
   if (dashboardState.beforeEndDateSearch !== "") {
-    filteredProjects = filteredProjects.filter((project) => {
-      const projectEndTime = new Date(project.contract.endDate).getTime();
-      const searchTime = new Date(dashboardState.beforeEndDateSearch).getTime();
-      return projectEndTime < searchTime;
-    });
+    filteredProjects = filterByBeforeEndDate(
+      dashboardState.beforeEndDateSearch,
+      filteredProjects
+    );
   }
 
   if (
@@ -158,11 +153,11 @@ export function Dashboard(): JSX.Element {
   }
 
   //FITLER BY CLIENT
-
   if (dashboardState.clientSearch !== "Select a Client...") {
     filteredProjects = filterByClient(dashboardState, filteredProjects);
   }
 
+  //FILTER BY EMPLOYEE
   if (dashboardState.employeeSearch !== "Select an Employee...") {
     filteredProjects = filterByEmployee(dashboardState, filteredProjects);
   }
