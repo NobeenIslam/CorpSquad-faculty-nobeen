@@ -41,6 +41,8 @@ import {
   filterByBeforeStartDate,
   filterByClient,
   filterByEmployee,
+  filterByGreaterThanRevenue,
+  filterByLessThanRevenue,
 } from "../utils/unitFunctions/filterFunctions";
 import {
   sortRevenueAscending,
@@ -53,8 +55,7 @@ export function Dashboard(): JSX.Element {
     initialDashboardState
   );
 
-  console.log("Greater REv", dashboardState.greaterRevenueSearch);
-  console.log("Lesser Rev", dashboardState.lesserRevenueSearch);
+  console.log(dashboardState);
 
   useEffect(() => {
     async function fetchAllData() {
@@ -106,6 +107,16 @@ export function Dashboard(): JSX.Element {
     filteredProjects.sort((proj1, proj2) =>
       sortRevenueDescending(proj1, proj2)
     );
+  }
+
+  //FITLER BY CLIENT
+  if (dashboardState.clientSearch !== "Select a Client...") {
+    filteredProjects = filterByClient(dashboardState, filteredProjects);
+  }
+
+  //FILTER BY EMPLOYEE
+  if (dashboardState.employeeSearch !== "Select an Employee...") {
+    filteredProjects = filterByEmployee(dashboardState, filteredProjects);
   }
 
   //FILTERBY Date
@@ -172,14 +183,19 @@ export function Dashboard(): JSX.Element {
     }
   }
 
-  //FITLER BY CLIENT
-  if (dashboardState.clientSearch !== "Select a Client...") {
-    filteredProjects = filterByClient(dashboardState, filteredProjects);
+  //FILTER BY REVENUE
+  if (dashboardState.greaterRevenueSearch !== "") {
+    filteredProjects = filterByGreaterThanRevenue(
+      dashboardState.greaterRevenueSearch,
+      filteredProjects
+    );
   }
 
-  //FILTER BY EMPLOYEE
-  if (dashboardState.employeeSearch !== "Select an Employee...") {
-    filteredProjects = filterByEmployee(dashboardState, filteredProjects);
+  if (dashboardState.lesserRevenueSearch !== "") {
+    filteredProjects = filterByLessThanRevenue(
+      dashboardState.lesserRevenueSearch,
+      filteredProjects
+    );
   }
 
   const projectCards: JSX.Element[] = filteredProjects.map((project) => (

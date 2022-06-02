@@ -79,3 +79,23 @@ export function filterByBeforeEndDate(
   });
   return filteredProjects;
 }
+
+export function filterByGreaterThanRevenue(
+  revenueSearch: string,
+  projectsToBeFiltered: ProjectInterfaceWithAllData[]
+): ProjectInterfaceWithAllData[] {
+  const filteredProjects = projectsToBeFiltered.filter((project) => {
+    return parseInt(project.contract.size) > parseInt(revenueSearch);
+  });
+  return filteredProjects;
+}
+
+export function filterByLessThanRevenue(
+  revenueSearch: string,
+  projectsToBeFiltered: ProjectInterfaceWithAllData[]
+): ProjectInterfaceWithAllData[] {
+  const filteredProjects = projectsToBeFiltered.filter(
+    (project) => parseInt(project.contract.size) < parseInt(revenueSearch)
+  );
+  return filteredProjects;
+}
