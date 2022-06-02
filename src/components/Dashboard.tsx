@@ -28,6 +28,9 @@ export function Dashboard(): JSX.Element {
     dashboardReducer,
     initialDashboardState
   );
+
+  console.log(dashboardState);
+
   useEffect(() => {
     async function fetchAllData() {
       const projects: ProjectInterface[] = await fetchProjects();

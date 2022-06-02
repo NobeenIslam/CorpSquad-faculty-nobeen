@@ -5,18 +5,21 @@ export const dashboardActionsLibrary = {
   SET_PROJECTS: "SET_PROJECTS",
   SET_CLIENT_SEARCH: "SET_CLIENT_SEARCH",
   SET_EMPLOYEE_SEARCH: "SET_EMPLOYEE_SEARCH",
+  TOGGLE_DATE_SORT: "TOGGLE_DATE_SORT",
 };
 
 export const initialDashboardState: DashboardState = {
   projects: [],
   clientSearch: "Select a Client...",
   employeeSearch: "Select an Employee...",
+  dateSortToggles: ["active", "inactive", "inactive", "inactive"],
 };
 
 export interface DashboardState {
   projects: ProjectInterfaceWithAllData[];
   clientSearch: string;
   employeeSearch: string;
+  dateSortToggles: string[];
 }
 
 export interface DashboardActions {
@@ -37,6 +40,9 @@ export function dashboardReducer(
     }
     case dashboardActionsLibrary.SET_EMPLOYEE_SEARCH: {
       return { ...state, employeeSearch: action.payload.employeeSearch };
+    }
+    case dashboardActionsLibrary.TOGGLE_DATE_SORT: {
+      return { ...state, dateSortToggles: action.payload.dateSortToggles };
     }
     default: {
       return state;
