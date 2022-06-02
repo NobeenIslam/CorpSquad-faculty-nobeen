@@ -58,7 +58,11 @@ export function dashboardReducer(
       return { ...state, employeeSearch: action.payload.employeeSearch };
     }
     case dashboardActionsLibrary.TOGGLE_DATE_SORT: {
-      return { ...state, dateSortToggles: action.payload.dateSortToggles };
+      return {
+        ...state,
+        dateSortToggles: action.payload.dateSortToggles,
+        revenueSortToggles: action.payload.revenueSortToggles,
+      };
     }
     case dashboardActionsLibrary.SET_AFTER_START_DATE_SEARCH: {
       return {

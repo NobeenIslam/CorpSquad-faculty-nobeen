@@ -80,7 +80,11 @@ export function FilterControls({
   function handleSortByRevenue(activateSort: string[]) {
     dashboardDispatch({
       type: dashboardActionsLibrary.SET_REVENUE_SORT,
-      payload: { ...dashboardState, revenueSortToggles: activateSort },
+      payload: {
+        ...dashboardState,
+        dateSortToggles: ["inactive", "inactive", "inactive", "inactive"],
+        revenueSortToggles: activateSort,
+      },
     });
   }
 

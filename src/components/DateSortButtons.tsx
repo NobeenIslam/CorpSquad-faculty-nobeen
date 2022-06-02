@@ -43,7 +43,11 @@ export function DateSortButtons({
   function handleSortByDate(buttonToggles: string[]): void {
     dashboardDispatch({
       type: dashboardActionsLibrary.TOGGLE_DATE_SORT,
-      payload: { ...dashboardState, dateSortToggles: buttonToggles },
+      payload: {
+        ...dashboardState,
+        dateSortToggles: buttonToggles,
+        revenueSortToggles: ["inactive,inactive"],
+      },
     });
   }
 
