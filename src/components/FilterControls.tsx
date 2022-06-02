@@ -10,6 +10,7 @@ import {
   filterControlsActionsLibrary,
 } from "../utils/reducerStateManagement/filterControlsManager";
 import { fetchClients, fetchEmployees } from "../utils/unitFunctions/fetchData";
+import { DateSortButtons } from "./DateSortButtons";
 
 interface FilterControlsProps {
   dashboardState: DashboardState;
@@ -54,37 +55,6 @@ export function FilterControls({
     //eslint-disable-next-line
     []
   );
-
-  const activateMostRecentStartDate = [
-    "active",
-    "inactive",
-    "inactive",
-    "inactive",
-  ];
-  const activateOldestStartDate = [
-    "inactive",
-    "active",
-    "inactive",
-    "inactive",
-  ];
-  const activateMostRecentEndDate = [
-    "inactive",
-    "inactive",
-    "active",
-    "inactive",
-  ];
-  const activateOldestEndDate = ["inactive", "inactive", "inactive", "active"];
-
-  function handleSortByDate(buttonToggles: string[]): void {
-    dashboardDispatch({
-      type: dashboardActionsLibrary.TOGGLE_DATE_SORT,
-      payload: { ...dashboardState, dateSortToggles: buttonToggles },
-    });
-  }
-
-  function setClassForSortButtonsIfActive(toggle: string): string {
-    return toggle === "active" ? "active" : "inactive";
-  }
 
   const clientNames = filterControlsState.clients
     .map((client) => client.name)
@@ -138,38 +108,10 @@ export function FilterControls({
         <option>Select an Employee...</option>
         {employeeNamesOptions}
       </select>
-      <button
-        className={setClassForSortButtonsIfActive(
-          dashboardState.dateSortToggles[0]
-        )}
-        onClick={() => handleSortByDate(activateMostRecentStartDate)}
-      >
-        Sort by StartDate (Most Recent First)
-      </button>
-      <button
-        className={setClassForSortButtonsIfActive(
-          dashboardState.dateSortToggles[1]
-        )}
-        onClick={() => handleSortByDate(activateOldestStartDate)}
-      >
-        Sort by StartDate (Oldest First)
-      </button>
-      <button
-        className={setClassForSortButtonsIfActive(
-          dashboardState.dateSortToggles[2]
-        )}
-        onClick={() => handleSortByDate(activateMostRecentEndDate)}
-      >
-        Sort by EndDate (Most Recent First)
-      </button>
-      <button
-        className={setClassForSortButtonsIfActive(
-          dashboardState.dateSortToggles[3]
-        )}
-        onClick={() => handleSortByDate(activateOldestEndDate)}
-      >
-        Sort by EndDate (Oldest First)
-      </button>
+      <DateSortButtons
+        dashboardState={dashboardState}
+        dashboardDispatch={dashboardDispatch}
+      />
     </>
   );
 }
