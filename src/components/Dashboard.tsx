@@ -104,6 +104,23 @@ export function Dashboard(): JSX.Element {
     });
   }
 
+  if (
+    dashboardState.afterStartDateSearch &&
+    dashboardState.beforeStartDateSearch !== ""
+  ) {
+    const afterSearchTime = new Date(dashboardState.afterStartDateSearch);
+    const beforeSearchTime = new Date(dashboardState.beforeStartDateSearch);
+    if (afterSearchTime > beforeSearchTime) {
+      window.alert(
+        "Started After filter must be less that Started Before! Please select again"
+      );
+      dashboardDispatch({
+        type: dashboardActionsLibrary.SET_BEFORE_START_DATE_SEARCH,
+        payload: { ...dashboardState, beforeStartDateSearch: "" },
+      });
+    }
+  }
+
   if (dashboardState.afterEndDateSearch !== "") {
     filteredProjects = filteredProjects.filter((project) => {
       const projectEndTime = new Date(project.contract.endDate).getTime();
@@ -118,6 +135,23 @@ export function Dashboard(): JSX.Element {
       const searchTime = new Date(dashboardState.beforeEndDateSearch).getTime();
       return projectEndTime < searchTime;
     });
+  }
+
+  if (
+    dashboardState.afterEndDateSearch &&
+    dashboardState.beforeEndDateSearch !== ""
+  ) {
+    const afterSearchTime = new Date(dashboardState.afterEndDateSearch);
+    const beforeSearchTime = new Date(dashboardState.beforeEndDateSearch);
+    if (afterSearchTime > beforeSearchTime) {
+      window.alert(
+        "Ended After filter must be less that Ended Before! Please select again"
+      );
+      dashboardDispatch({
+        type: dashboardActionsLibrary.SET_BEFORE_END_DATE_SEARCH,
+        payload: { ...dashboardState, beforeEndDateSearch: "" },
+      });
+    }
   }
 
   //FITLER BY CLIENT
