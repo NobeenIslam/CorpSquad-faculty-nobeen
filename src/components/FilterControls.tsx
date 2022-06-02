@@ -87,6 +87,16 @@ export function FilterControls({
 
   return (
     <>
+      <button
+        onClick={() =>
+          dashboardDispatch({
+            type: dashboardActionsLibrary.RESET_FITLERS,
+            payload: dashboardState,
+          })
+        }
+      >
+        Reset Filters
+      </button>
       <select
         value={dashboardState.clientSearch}
         onChange={(e) => {
