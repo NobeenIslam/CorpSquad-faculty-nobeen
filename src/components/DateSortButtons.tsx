@@ -9,30 +9,36 @@ interface DateSortButtonsProps {
   dashboardDispatch: React.Dispatch<DashboardActions>;
 }
 
+export const activateMostRecentStartDate = [
+  "active",
+  "inactive",
+  "inactive",
+  "inactive",
+];
+export const activateOldestStartDate = [
+  "inactive",
+  "active",
+  "inactive",
+  "inactive",
+];
+export const activateMostRecentEndDate = [
+  "inactive",
+  "inactive",
+  "active",
+  "inactive",
+];
+export const activateOldestEndDate = [
+  "inactive",
+  "inactive",
+  "inactive",
+  "active",
+];
+
 export function DateSortButtons({
   dashboardState,
   dashboardDispatch,
 }: DateSortButtonsProps): JSX.Element {
-  const activateMostRecentStartDate = [
-    "active",
-    "inactive",
-    "inactive",
-    "inactive",
-  ];
-  const activateOldestStartDate = [
-    "inactive",
-    "active",
-    "inactive",
-    "inactive",
-  ];
-  const activateMostRecentEndDate = [
-    "inactive",
-    "inactive",
-    "active",
-    "inactive",
-  ];
-  const activateOldestEndDate = ["inactive", "inactive", "inactive", "active"];
-
+  //Decided to not create 4 hadlefunctions to reduce reptition. Constants above indicate which is being activated
   function handleSortByDate(buttonToggles: string[]): void {
     dashboardDispatch({
       type: dashboardActionsLibrary.TOGGLE_DATE_SORT,
