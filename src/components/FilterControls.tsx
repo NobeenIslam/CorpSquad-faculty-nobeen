@@ -10,6 +10,7 @@ import {
   filterControlsActionsLibrary,
 } from "../utils/reducerStateManagement/filterControlsManager";
 import { fetchClients, fetchEmployees } from "../utils/unitFunctions/fetchData";
+import { setClassForSortButtonsIfActive } from "../utils/unitFunctions/setClassForSortButtonsIfActive";
 import { DatePickerFilters } from "./DatePickerFilters";
 import { DateSortButtons } from "./DateSortButtons";
 
@@ -73,6 +74,16 @@ export function FilterControls({
     )
   );
 
+  const activateSortRevenueAscending = ["active", "inactive"];
+  const activateSortRevenueDescending = ["inactive", "active"];
+
+  function handleSortByRevenue(activateSort: string[]) {
+    dashboardDispatch({
+      type: dashboardActionsLibrary.SET_REVENUE_SORT,
+      payload: { ...dashboardState, revenueSortToggles: activateSort },
+    });
+  }
+
   const employeeNamesOptions: JSX.Element[] = employeeNames.map(
     (employeeName, index) => (
       <option key={index} value={employeeName}>
@@ -117,6 +128,22 @@ export function FilterControls({
         dashboardState={dashboardState}
         dashboardDispatch={dashboardDispatch}
       />
+      <button
+        className={setClassForSortButtonsIfActive(
+          dashboardState.revenueSortToggles[0]
+        )}
+        onClick={() => handleSortByRevenue(activateSortRevenueAscending)}
+      >
+        Sort by Revenue (Ascending)
+      </button>
+      <button
+        className={setClassForSortButtonsIfActive(
+          dashboardState.revenueSortToggles[1]
+        )}
+        onClick={() => handleSortByRevenue(activateSortRevenueDescending)}
+      >
+        Sort by Revenue (Descending)
+      </button>
     </>
   );
 }

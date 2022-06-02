@@ -3,6 +3,7 @@ import {
   DashboardActions,
   dashboardActionsLibrary,
 } from "../utils/reducerStateManagement/dashboardManager";
+import { setClassForSortButtonsIfActive } from "../utils/unitFunctions/setClassForSortButtonsIfActive";
 
 interface DateSortButtonsProps {
   dashboardState: DashboardState;
@@ -44,10 +45,6 @@ export function DateSortButtons({
       type: dashboardActionsLibrary.TOGGLE_DATE_SORT,
       payload: { ...dashboardState, dateSortToggles: buttonToggles },
     });
-  }
-
-  function setClassForSortButtonsIfActive(toggle: string): string {
-    return toggle === "active" ? "active" : "inactive";
   }
 
   return (

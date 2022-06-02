@@ -10,7 +10,7 @@ export const dashboardActionsLibrary = {
   SET_BEFORE_START_DATE_SEARCH: "SET_BEFORE_START_DATE_SEARCH",
   SET_AFTER_END_DATE_SEARCH: "SET_AFTER_END_DATE_SEARCH",
   SET_BEFORE_END_DATE_SEARCH: "SET_BEFORE_END_DATE_SEARCH",
-  SET_REVENUE_SEARCH: "SET_REVENUE_SEARCH",
+  SET_REVENUE_SORT: "SET_REVENUE_SORT",
 };
 
 //endDate searches are initialised empty strings because when you "clear" on the date picker it sets the value to empty ""
@@ -23,7 +23,7 @@ export const initialDashboardState: DashboardState = {
   beforeStartDateSearch: "",
   afterEndDateSearch: "",
   beforeEndDateSearch: "",
-  revenueSearch: "",
+  revenueSortToggles: ["inactive", "inactive"],
 };
 
 export interface DashboardState {
@@ -35,7 +35,7 @@ export interface DashboardState {
   beforeStartDateSearch: string;
   afterEndDateSearch: string;
   beforeEndDateSearch: string;
-  revenueSearch: string;
+  revenueSortToggles: string[];
 }
 
 export interface DashboardActions {
@@ -84,8 +84,11 @@ export function dashboardReducer(
         beforeEndDateSearch: action.payload.beforeEndDateSearch,
       };
     }
-    case dashboardActionsLibrary.SET_REVENUE_SEARCH: {
-      return { ...state, revenueSearch: action.payload.revenueSearch };
+    case dashboardActionsLibrary.SET_REVENUE_SORT: {
+      return {
+        ...state,
+        revenueSortToggles: action.payload.revenueSortToggles,
+      };
     }
     default: {
       return state;
