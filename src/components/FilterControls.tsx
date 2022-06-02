@@ -10,6 +10,7 @@ import {
   filterControlsActionsLibrary,
 } from "../utils/reducerStateManagement/filterControlsManager";
 import { fetchClients, fetchEmployees } from "../utils/unitFunctions/fetchData";
+import { DateSortButtons } from "./DateSortButtons";
 
 interface FilterControlsProps {
   dashboardState: DashboardState;
@@ -107,10 +108,10 @@ export function FilterControls({
         <option>Select an Employee...</option>
         {employeeNamesOptions}
       </select>
-      <button>Sort by StartDate (Most Recent First)</button>
-      <button>Sort by StartDate (Oldest First)</button>
-      <button>Sort by EndDate (Most Recent First)</button>
-      <button>Sort by StartDate (Oldest First)</button>
+      <DateSortButtons
+        dashboardState={dashboardState}
+        dashboardDispatch={dashboardDispatch}
+      />
     </>
   );
 }

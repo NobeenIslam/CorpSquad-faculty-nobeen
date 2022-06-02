@@ -21,13 +21,26 @@ import {
   initialDashboardState,
 } from "../utils/reducerStateManagement/dashboardManager";
 import { getProjectsEmployeeNames } from "../utils/unitFunctions/getProjectsEmployeeNames";
-import { mostRecentStartDateFirst } from "../utils/unitFunctions/sortDateFunctions";
+import {
+  mostRecentEndDateFirst,
+  mostRecentStartDateFirst,
+  oldestEndDateFirst,
+  oldestStartDateFirst,
+} from "../utils/unitFunctions/sortDateFunctions";
+import {
+  activateMostRecentEndDate,
+  activateOldestEndDate,
+  activateOldestStartDate,
+} from "./DateSortButtons";
 
 export function Dashboard(): JSX.Element {
   const [dashboardState, dashboardDispatch] = useReducer(
     dashboardReducer,
     initialDashboardState
   );
+
+  console.log(dashboardState);
+
   useEffect(() => {
     async function fetchAllData() {
       const projects: ProjectInterface[] = await fetchProjects();
@@ -57,12 +70,14 @@ export function Dashboard(): JSX.Element {
       mostRecentStartDateFirst(proj1, proj2)
     );
 
+  //FITLER BY CLIENT
   if (dashboardState.clientSearch !== "Select a Client...") {
     filteredProjects = dashboardState.projects.filter(
       (project) => project.clientName === dashboardState.clientSearch
     );
   }
 
+  //FILTER BY EMPLOYEE
   function doesProjectIncludeEmployee(
     project: ProjectInterfaceWithAllData
   ): boolean {
@@ -74,6 +89,18 @@ export function Dashboard(): JSX.Element {
     filteredProjects = filteredProjects.filter((project) =>
       doesProjectIncludeEmployee(project)
     );
+  }
+
+  //SORT BY DATE
+  //Sort by most recent start date is DEFAULT
+  if (dashboardState.dateSortToggles === activateOldestStartDate) {
+    filteredProjects.sort((proj1, proj2) => oldestStartDateFirst(proj1, proj2));
+  } else if (dashboardState.dateSortToggles === activateMostRecentEndDate) {
+    filteredProjects.sort((proj1, proj2) =>
+      mostRecentEndDateFirst(proj1, proj2)
+    );
+  } else if (dashboardState.dateSortToggles === activateOldestEndDate) {
+    filteredProjects.sort((proj1, proj2) => oldestEndDateFirst(proj1, proj2));
   }
 
   const projectCards: JSX.Element[] = filteredProjects.map((project) => (
