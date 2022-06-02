@@ -20,7 +20,6 @@ import {
   dashboardReducer,
   initialDashboardState,
 } from "../utils/reducerStateManagement/dashboardManager";
-import { getProjectsEmployeeNames } from "../utils/unitFunctions/getProjectsEmployeeNames";
 import {
   mostRecentEndDateFirst,
   mostRecentStartDateFirst,
@@ -32,6 +31,10 @@ import {
   activateOldestEndDate,
   activateOldestStartDate,
 } from "./DateSortButtons";
+import {
+  filterByClient,
+  filterByEmployee,
+} from "../utils/unitFunctions/filterFunctions";
 
 export function Dashboard(): JSX.Element {
   const [dashboardState, dashboardDispatch] = useReducer(
@@ -155,24 +158,13 @@ export function Dashboard(): JSX.Element {
   }
 
   //FITLER BY CLIENT
-  if (dashboardState.clientSearch !== "Select a Client...") {
-    filteredProjects = dashboardState.projects.filter(
-      (project) => project.clientName === dashboardState.clientSearch
-    );
-  }
 
-  //FILTER BY EMPLOYEE
-  function doesProjectIncludeEmployee(
-    project: ProjectInterfaceWithAllData
-  ): boolean {
-    const thisProjectsEmployeeNames = getProjectsEmployeeNames(project);
-    return thisProjectsEmployeeNames.includes(dashboardState.employeeSearch);
+  if (dashboardState.clientSearch !== "Select a Client...") {
+    filteredProjects = filterByClient(dashboardState, filteredProjects);
   }
 
   if (dashboardState.employeeSearch !== "Select an Employee...") {
-    filteredProjects = filteredProjects.filter((project) =>
-      doesProjectIncludeEmployee(project)
-    );
+    filteredProjects = filterByEmployee(dashboardState, filteredProjects);
   }
 
   const projectCards: JSX.Element[] = filteredProjects.map((project) => (
