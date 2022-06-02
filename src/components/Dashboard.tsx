@@ -14,7 +14,11 @@ import {
 } from "../utils/Interfaces";
 import { sumAllRevenues } from "../utils/unitFunctions/sumAllRevenues";
 import { ProjectCard } from "./ProjectCard";
-import { FilterControls } from "./FilterControls";
+import {
+  activateSortRevenueAscending,
+  activateSortRevenueDescending,
+  FilterControls,
+} from "./FilterControls";
 import {
   dashboardActionsLibrary,
   dashboardReducer,
@@ -37,7 +41,13 @@ import {
   filterByBeforeStartDate,
   filterByClient,
   filterByEmployee,
+  filterByGreaterThanRevenue,
+  filterByLessThanRevenue,
 } from "../utils/unitFunctions/filterFunctions";
+import {
+  sortRevenueAscending,
+  sortRevenueDescending,
+} from "../utils/unitFunctions/sortRevenueFunctions";
 
 export function Dashboard(): JSX.Element {
   const [dashboardState, dashboardDispatch] = useReducer(
@@ -86,6 +96,27 @@ export function Dashboard(): JSX.Element {
     );
   } else if (dashboardState.dateSortToggles === activateOldestEndDate) {
     filteredProjects.sort((proj1, proj2) => oldestEndDateFirst(proj1, proj2));
+  }
+
+  //SORT BY REVENUE
+  if (dashboardState.revenueSortToggles === activateSortRevenueAscending) {
+    filteredProjects.sort((proj1, proj2) => sortRevenueAscending(proj1, proj2));
+  } else if (
+    dashboardState.revenueSortToggles === activateSortRevenueDescending
+  ) {
+    filteredProjects.sort((proj1, proj2) =>
+      sortRevenueDescending(proj1, proj2)
+    );
+  }
+
+  //FITLER BY CLIENT
+  if (dashboardState.clientSearch !== "Select a Client...") {
+    filteredProjects = filterByClient(dashboardState, filteredProjects);
+  }
+
+  //FILTER BY EMPLOYEE
+  if (dashboardState.employeeSearch !== "Select an Employee...") {
+    filteredProjects = filterByEmployee(dashboardState, filteredProjects);
   }
 
   //FILTERBY Date
@@ -152,14 +183,19 @@ export function Dashboard(): JSX.Element {
     }
   }
 
-  //FITLER BY CLIENT
-  if (dashboardState.clientSearch !== "Select a Client...") {
-    filteredProjects = filterByClient(dashboardState, filteredProjects);
+  //FILTER BY REVENUE
+  if (dashboardState.greaterRevenueSearch !== "") {
+    filteredProjects = filterByGreaterThanRevenue(
+      dashboardState.greaterRevenueSearch,
+      filteredProjects
+    );
   }
 
-  //FILTER BY EMPLOYEE
-  if (dashboardState.employeeSearch !== "Select an Employee...") {
-    filteredProjects = filterByEmployee(dashboardState, filteredProjects);
+  if (dashboardState.lesserRevenueSearch !== "") {
+    filteredProjects = filterByLessThanRevenue(
+      dashboardState.lesserRevenueSearch,
+      filteredProjects
+    );
   }
 
   const projectCards: JSX.Element[] = filteredProjects.map((project) => (
