@@ -115,6 +115,7 @@ export function Dashboard(): JSX.Element {
     <>
       <main className="mainContent">
         <h1 className="title">Aggregate Revenue: £{aggregateRevenue}</h1>
+        <h2>Filter Projects:</h2>
         <div>Projects Found: {filteredProjects.length}</div>
         <FilterControls
           dashboardState={dashboardState}
