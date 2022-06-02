@@ -53,7 +53,8 @@ export function Dashboard(): JSX.Element {
     initialDashboardState
   );
 
-  console.log(dashboardState);
+  console.log("Greater REv", dashboardState.greaterRevenueSearch);
+  console.log("Lesser Rev", dashboardState.lesserRevenueSearch);
 
   useEffect(() => {
     async function fetchAllData() {

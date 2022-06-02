@@ -88,6 +88,52 @@ export function FilterControls({
     });
   }
 
+  function handleSearchGreatRevenue(
+    e: React.ChangeEvent<HTMLInputElement>
+  ): void {
+    if (e.target.value.match(/[a-zA-Z]|[^A-Za-z0-9_]/)) {
+      dashboardDispatch({
+        type: dashboardActionsLibrary.SET_GREATER_REVENUE_SEARCH,
+        payload: {
+          ...dashboardState,
+          greaterRevenueSearch: "",
+        },
+      });
+      window.alert("Only numbers please!!");
+      return;
+    }
+    dashboardDispatch({
+      type: dashboardActionsLibrary.SET_GREATER_REVENUE_SEARCH,
+      payload: {
+        ...dashboardState,
+        greaterRevenueSearch: e.target.value,
+      },
+    });
+  }
+
+  function handleSearchLesserRevenue(
+    e: React.ChangeEvent<HTMLInputElement>
+  ): void {
+    if (e.target.value.match(/[a-zA-Z]|[^A-Za-z0-9_]/)) {
+      dashboardDispatch({
+        type: dashboardActionsLibrary.SET_LESSER_REVENUE_SEARCH,
+        payload: {
+          ...dashboardState,
+          lesserRevenueSearch: "",
+        },
+      });
+      window.alert("Only numbers please!!");
+      return;
+    }
+    dashboardDispatch({
+      type: dashboardActionsLibrary.SET_LESSER_REVENUE_SEARCH,
+      payload: {
+        ...dashboardState,
+        lesserRevenueSearch: e.target.value,
+      },
+    });
+  }
+
   const employeeNamesOptions: JSX.Element[] = employeeNames.map(
     (employeeName, index) => (
       <option key={index} value={employeeName}>
@@ -148,6 +194,16 @@ export function FilterControls({
       >
         Sort by Revenue (Descending)
       </button>
+      <input
+        placeholder="Search for a revenue greater than..."
+        value={dashboardState.greaterRevenueSearch}
+        onChange={(e) => handleSearchGreatRevenue(e)}
+      ></input>
+      <input
+        placeholder="Search for a revenue less than..."
+        value={dashboardState.lesserRevenueSearch}
+        onChange={(e) => handleSearchLesserRevenue(e)}
+      ></input>
     </>
   );
 }

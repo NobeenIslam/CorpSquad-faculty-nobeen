@@ -11,19 +11,8 @@ export const dashboardActionsLibrary = {
   SET_AFTER_END_DATE_SEARCH: "SET_AFTER_END_DATE_SEARCH",
   SET_BEFORE_END_DATE_SEARCH: "SET_BEFORE_END_DATE_SEARCH",
   SET_REVENUE_SORT: "SET_REVENUE_SORT",
-};
-
-//endDate searches are initialised empty strings because when you "clear" on the date picker it sets the value to empty ""
-export const initialDashboardState: DashboardState = {
-  projects: [],
-  clientSearch: "Select a Client...",
-  employeeSearch: "Select an Employee...",
-  dateSortToggles: ["active", "inactive", "inactive", "inactive"],
-  afterStartDateSearch: "",
-  beforeStartDateSearch: "",
-  afterEndDateSearch: "",
-  beforeEndDateSearch: "",
-  revenueSortToggles: ["inactive", "inactive"],
+  SET_GREATER_REVENUE_SEARCH: "SET_GREATER_REVENUE_SEARCH",
+  SET_LESSER_REVENUE_SEARCH: "SET_LESSER_REVENUE_SEARCH",
 };
 
 export interface DashboardState {
@@ -36,7 +25,25 @@ export interface DashboardState {
   afterEndDateSearch: string;
   beforeEndDateSearch: string;
   revenueSortToggles: string[];
+  greaterRevenueSearch: string;
+  lesserRevenueSearch: string;
 }
+
+/*endDate searches are initialised empty strings because when you "clear" on the date picker it sets the value to empty"".
+ */
+export const initialDashboardState: DashboardState = {
+  projects: [],
+  clientSearch: "Select a Client...",
+  employeeSearch: "Select an Employee...",
+  dateSortToggles: ["active", "inactive", "inactive", "inactive"],
+  afterStartDateSearch: "",
+  beforeStartDateSearch: "",
+  afterEndDateSearch: "",
+  beforeEndDateSearch: "",
+  revenueSortToggles: ["inactive", "inactive"],
+  greaterRevenueSearch: "",
+  lesserRevenueSearch: "",
+};
 
 export interface DashboardActions {
   type: string;
@@ -93,6 +100,18 @@ export function dashboardReducer(
         ...state,
         dateSortToggles: action.payload.dateSortToggles,
         revenueSortToggles: action.payload.revenueSortToggles,
+      };
+    }
+    case dashboardActionsLibrary.SET_GREATER_REVENUE_SEARCH: {
+      return {
+        ...state,
+        greaterRevenueSearch: action.payload.greaterRevenueSearch,
+      };
+    }
+    case dashboardActionsLibrary.SET_LESSER_REVENUE_SEARCH: {
+      return {
+        ...state,
+        lesserRevenueSearch: action.payload.lesserRevenueSearch,
       };
     }
     default: {
