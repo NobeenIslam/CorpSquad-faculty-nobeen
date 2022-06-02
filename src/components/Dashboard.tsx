@@ -20,7 +20,6 @@ import {
   dashboardReducer,
   initialDashboardState,
 } from "../utils/reducerStateManagement/dashboardManager";
-import { getProjectsEmployeeNames } from "../utils/unitFunctions/getProjectsEmployeeNames";
 import {
   mostRecentEndDateFirst,
   mostRecentStartDateFirst,
@@ -32,6 +31,13 @@ import {
   activateOldestEndDate,
   activateOldestStartDate,
 } from "./DateSortButtons";
+import {
+  filterByAfterStartDate,
+  filterByBeforeEndDate,
+  filterByBeforeStartDate,
+  filterByClient,
+  filterByEmployee,
+} from "../utils/unitFunctions/filterFunctions";
 
 export function Dashboard(): JSX.Element {
   const [dashboardState, dashboardDispatch] = useReducer(
@@ -64,32 +70,11 @@ export function Dashboard(): JSX.Element {
 
   const aggregateRevenue = sumAllRevenues(dashboardState.projects);
 
-  //order by startDate by default
+  //order by by most recentstartDate by default
   let filteredProjects: ProjectInterfaceWithAllData[] =
     dashboardState.projects.sort((proj1, proj2) =>
       mostRecentStartDateFirst(proj1, proj2)
     );
-
-  //FITLER BY CLIENT
-  if (dashboardState.clientSearch !== "Select a Client...") {
-    filteredProjects = dashboardState.projects.filter(
-      (project) => project.clientName === dashboardState.clientSearch
-    );
-  }
-
-  //FILTER BY EMPLOYEE
-  function doesProjectIncludeEmployee(
-    project: ProjectInterfaceWithAllData
-  ): boolean {
-    const thisProjectsEmployeeNames = getProjectsEmployeeNames(project);
-    return thisProjectsEmployeeNames.includes(dashboardState.employeeSearch);
-  }
-
-  if (dashboardState.employeeSearch !== "Select an Employee...") {
-    filteredProjects = filteredProjects.filter((project) =>
-      doesProjectIncludeEmployee(project)
-    );
-  }
 
   //SORT BY DATE
   //Sort by most recent start date is DEFAULT
@@ -101,6 +86,80 @@ export function Dashboard(): JSX.Element {
     );
   } else if (dashboardState.dateSortToggles === activateOldestEndDate) {
     filteredProjects.sort((proj1, proj2) => oldestEndDateFirst(proj1, proj2));
+  }
+
+  //FILTERBY Date
+
+  if (dashboardState.afterStartDateSearch !== "") {
+    filteredProjects = filterByAfterStartDate(
+      dashboardState.afterStartDateSearch,
+      filteredProjects
+    );
+  }
+
+  if (dashboardState.beforeStartDateSearch !== "") {
+    filteredProjects = filterByBeforeStartDate(
+      dashboardState.beforeStartDateSearch,
+      filteredProjects
+    );
+  }
+
+  if (
+    dashboardState.afterStartDateSearch &&
+    dashboardState.beforeStartDateSearch !== ""
+  ) {
+    const afterSearchTime = new Date(dashboardState.afterStartDateSearch);
+    const beforeSearchTime = new Date(dashboardState.beforeStartDateSearch);
+    if (afterSearchTime > beforeSearchTime) {
+      window.alert(
+        "Started After filter must be less that Started Before! Please select again"
+      );
+      dashboardDispatch({
+        type: dashboardActionsLibrary.SET_BEFORE_START_DATE_SEARCH,
+        payload: { ...dashboardState, beforeStartDateSearch: "" },
+      });
+    }
+  }
+
+  if (dashboardState.afterEndDateSearch !== "") {
+    filteredProjects = filterByAfterStartDate(
+      dashboardState.afterEndDateSearch,
+      filteredProjects
+    );
+  }
+
+  if (dashboardState.beforeEndDateSearch !== "") {
+    filteredProjects = filterByBeforeEndDate(
+      dashboardState.beforeEndDateSearch,
+      filteredProjects
+    );
+  }
+
+  if (
+    dashboardState.afterEndDateSearch &&
+    dashboardState.beforeEndDateSearch !== ""
+  ) {
+    const afterSearchTime = new Date(dashboardState.afterEndDateSearch);
+    const beforeSearchTime = new Date(dashboardState.beforeEndDateSearch);
+    if (afterSearchTime > beforeSearchTime) {
+      window.alert(
+        "Ended After filter must be less that Ended Before! Please select again"
+      );
+      dashboardDispatch({
+        type: dashboardActionsLibrary.SET_BEFORE_END_DATE_SEARCH,
+        payload: { ...dashboardState, beforeEndDateSearch: "" },
+      });
+    }
+  }
+
+  //FITLER BY CLIENT
+  if (dashboardState.clientSearch !== "Select a Client...") {
+    filteredProjects = filterByClient(dashboardState, filteredProjects);
+  }
+
+  //FILTER BY EMPLOYEE
+  if (dashboardState.employeeSearch !== "Select an Employee...") {
+    filteredProjects = filterByEmployee(dashboardState, filteredProjects);
   }
 
   const projectCards: JSX.Element[] = filteredProjects.map((project) => (
@@ -115,6 +174,7 @@ export function Dashboard(): JSX.Element {
     <>
       <main className="mainContent">
         <h1 className="title">Aggregate Revenue: £{aggregateRevenue}</h1>
+        <h2>Filter Projects:</h2>
         <div>Projects Found: {filteredProjects.length}</div>
         <FilterControls
           dashboardState={dashboardState}

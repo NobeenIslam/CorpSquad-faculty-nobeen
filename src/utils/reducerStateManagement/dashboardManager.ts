@@ -6,13 +6,22 @@ export const dashboardActionsLibrary = {
   SET_CLIENT_SEARCH: "SET_CLIENT_SEARCH",
   SET_EMPLOYEE_SEARCH: "SET_EMPLOYEE_SEARCH",
   TOGGLE_DATE_SORT: "TOGGLE_DATE_SORT",
+  SET_AFTER_START_DATE_SEARCH: "SET_AFTER_START_DATE_SEARCH",
+  SET_BEFORE_START_DATE_SEARCH: "SET_BEFORE_START_DATE_SEARCH",
+  SET_AFTER_END_DATE_SEARCH: "SET_AFTER_END_DATE_SEARCH",
+  SET_BEFORE_END_DATE_SEARCH: "SET_BEFORE_END_DATE_SEARCH",
 };
 
+//endDate searches are initialised empty strings because when you "clear" on the date picker it sets the value to empty ""
 export const initialDashboardState: DashboardState = {
   projects: [],
   clientSearch: "Select a Client...",
   employeeSearch: "Select an Employee...",
   dateSortToggles: ["active", "inactive", "inactive", "inactive"],
+  afterStartDateSearch: "",
+  beforeStartDateSearch: "",
+  afterEndDateSearch: "",
+  beforeEndDateSearch: "",
 };
 
 export interface DashboardState {
@@ -20,6 +29,10 @@ export interface DashboardState {
   clientSearch: string;
   employeeSearch: string;
   dateSortToggles: string[];
+  afterStartDateSearch: string;
+  beforeStartDateSearch: string;
+  afterEndDateSearch: string;
+  beforeEndDateSearch: string;
 }
 
 export interface DashboardActions {
@@ -43,6 +56,30 @@ export function dashboardReducer(
     }
     case dashboardActionsLibrary.TOGGLE_DATE_SORT: {
       return { ...state, dateSortToggles: action.payload.dateSortToggles };
+    }
+    case dashboardActionsLibrary.SET_AFTER_START_DATE_SEARCH: {
+      return {
+        ...state,
+        afterStartDateSearch: action.payload.afterStartDateSearch,
+      };
+    }
+    case dashboardActionsLibrary.SET_BEFORE_START_DATE_SEARCH: {
+      return {
+        ...state,
+        beforeStartDateSearch: action.payload.beforeStartDateSearch,
+      };
+    }
+    case dashboardActionsLibrary.SET_AFTER_END_DATE_SEARCH: {
+      return {
+        ...state,
+        afterEndDateSearch: action.payload.afterEndDateSearch,
+      };
+    }
+    case dashboardActionsLibrary.SET_BEFORE_END_DATE_SEARCH: {
+      return {
+        ...state,
+        beforeEndDateSearch: action.payload.beforeEndDateSearch,
+      };
     }
     default: {
       return state;
