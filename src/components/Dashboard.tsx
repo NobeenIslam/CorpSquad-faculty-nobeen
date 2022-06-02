@@ -104,6 +104,22 @@ export function Dashboard(): JSX.Element {
     });
   }
 
+  if (dashboardState.afterEndDateSearch !== "") {
+    filteredProjects = filteredProjects.filter((project) => {
+      const projectEndTime = new Date(project.contract.endDate).getTime();
+      const searchTime = new Date(dashboardState.afterEndDateSearch).getTime();
+      return projectEndTime > searchTime;
+    });
+  }
+
+  if (dashboardState.beforeEndDateSearch !== "") {
+    filteredProjects = filteredProjects.filter((project) => {
+      const projectEndTime = new Date(project.contract.endDate).getTime();
+      const searchTime = new Date(dashboardState.beforeEndDateSearch).getTime();
+      return projectEndTime < searchTime;
+    });
+  }
+
   //FITLER BY CLIENT
   if (dashboardState.clientSearch !== "Select a Client...") {
     filteredProjects = dashboardState.projects.filter(

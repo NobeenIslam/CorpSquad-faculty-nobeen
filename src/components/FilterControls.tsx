@@ -112,7 +112,7 @@ export function FilterControls({
         dashboardState={dashboardState}
         dashboardDispatch={dashboardDispatch}
       />
-      <div>After Start-Date</div>
+      <div>Started After:</div>
       <input
         type="date"
         onChange={(e) => {
@@ -125,7 +125,7 @@ export function FilterControls({
           });
         }}
       ></input>
-      <div>Before Start-Date</div>
+      <div>Started Before:</div>
       <input
         type="date"
         onChange={(e) => {
@@ -138,7 +138,7 @@ export function FilterControls({
           });
         }}
       ></input>
-      <div>After End-Date</div>
+      <div>Ended After:</div>
       <input
         type="date"
         onChange={(e) => {
@@ -148,7 +148,7 @@ export function FilterControls({
           });
         }}
       ></input>
-      <div>Before End-Date</div>
+      <div>Ended Before:</div>
       <input
         type="date"
         onChange={(e) => {
