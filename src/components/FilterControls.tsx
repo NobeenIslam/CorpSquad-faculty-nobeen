@@ -25,6 +25,7 @@ export function FilterControls({
     initialFilterControlsState
   );
 
+  //Decided to fetch the clients and employees data from the end point as it was easier to extract the client and employee names from that raw data to use in the drop downs.
   useEffect(
     () => {
       async function storeClientsAndEmployees() {
@@ -106,6 +107,10 @@ export function FilterControls({
         <option>Select an Employee...</option>
         {employeeNamesOptions}
       </select>
+      <button>Sort by StartDate (Most Recent First)</button>
+      <button>Sort by StartDate (Oldest First)</button>
+      <button>Sort by EndDate (Most Recent First)</button>
+      <button>Sort by StartDate (Oldest First)</button>
     </>
   );
 }
