@@ -17,6 +17,7 @@ export function DatePickerFilters({
       <div>Started After:</div>
       <input
         type="date"
+        value={dashboardState.afterStartDateSearch}
         onChange={(e) => {
           dashboardDispatch({
             type: dashboardActionsLibrary.SET_AFTER_START_DATE_SEARCH,
@@ -30,6 +31,7 @@ export function DatePickerFilters({
       <div>Started Before:</div>
       <input
         type="date"
+        value={dashboardState.beforeStartDateSearch}
         onChange={(e) => {
           dashboardDispatch({
             type: dashboardActionsLibrary.SET_BEFORE_START_DATE_SEARCH,
@@ -43,6 +45,7 @@ export function DatePickerFilters({
       <div>Ended After:</div>
       <input
         type="date"
+        value={dashboardState.afterEndDateSearch}
         onChange={(e) => {
           dashboardDispatch({
             type: dashboardActionsLibrary.SET_AFTER_END_DATE_SEARCH,
@@ -53,6 +56,7 @@ export function DatePickerFilters({
       <div>Ended Before:</div>
       <input
         type="date"
+        value={dashboardState.beforeEndDateSearch}
         onChange={(e) => {
           dashboardDispatch({
             type: dashboardActionsLibrary.SET_BEFORE_END_DATE_SEARCH,
