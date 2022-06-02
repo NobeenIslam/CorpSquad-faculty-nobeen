@@ -61,11 +61,33 @@ export const testProjectsWithClientNames: ProjectInterfaceWithClientName[] = [
   { ...testProjects[1], clientName: "Will - Lehner" },
 ];
 
-export const testProjectsWithAllData: ProjectInterfaceWithAllData[] = [
-  {
-    ...testProjects[0],
-    clientName: "Murray, Corwin and Mante",
-    employees: testEmployees,
+export const testProject1WithAllData = {
+  id: "f0b83d3a0b77da97ec7eefc4",
+  clientId: "2ebfad09bacb0c0cc031b5fa",
+  employeeIds: ["9fbdd0ddcaaef6f1f21d674b", "59bcf5e767dfaab0db908acc"],
+  contract: {
+    startDate: "Thu Jun 20 2019",
+    endDate: "Thu Dec 30 2021",
+    size: "60",
   },
-  { ...testProjects[1], clientName: "Will - Lehner", employees: testEmployees },
+  clientName: "Murray, Corwin and Mante",
+  employees: testEmployees,
+};
+
+export const testProject2WithAllData = {
+  id: "3c8a1083d6befcfbbb1cca37",
+  clientId: "e729699c1e86e4a760a51f5b",
+  employeeIds: ["9fbdd0ddcaaef6f1f21d674b", "59bcf5e767dfaab0db908acc"],
+  contract: {
+    startDate: "Sat Jan 02 2021",
+    endDate: "Mon Jun 21 2021",
+    size: "61",
+  },
+  clientName: "Will - Lehner",
+  employees: testEmployees,
+};
+
+export const testProjectsWithAllData: ProjectInterfaceWithAllData[] = [
+  testProject1WithAllData,
+  testProject2WithAllData,
 ];
