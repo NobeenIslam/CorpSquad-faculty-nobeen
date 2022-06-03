@@ -5,25 +5,15 @@ import { sortByEmployeeName } from "../utils/unitFunctions/sortByEmployeeName";
 
 interface ProjectCardProps {
   project: ProjectInterfaceWithAllData;
-  projects: ProjectInterfaceWithAllData[]; //Passing down to children so it can be used in EmployeeToken Link
 }
 
-export function ProjectCard({
-  project,
-  projects,
-}: ProjectCardProps): JSX.Element {
+export function ProjectCard({ project }: ProjectCardProps): JSX.Element {
   const alphabeticalEmployees = project.employees.sort((e1, e2) =>
     sortByEmployeeName(e1, e2)
   );
 
   const employeeTokens: JSX.Element[] = alphabeticalEmployees.map(
-    (employee) => (
-      <EmployeeToken
-        key={employee.id}
-        employee={employee}
-        projects={projects}
-      />
-    )
+    (employee) => <EmployeeToken key={employee.id} employee={employee} />
   );
 
   return (
@@ -35,9 +25,7 @@ export function ProjectCard({
       </div>
       <div>
         <b>Client:</b>{" "}
-        <Link to={`/clients/${project.clientId}`} state={projects}>
-          {project.clientName}
-        </Link>
+        <Link to={`/clients/${project.clientId}`}>{project.clientName}</Link>
       </div>
       <div>
         <b>Revenue:</b> £{project.contract.size}

@@ -7,22 +7,29 @@ import { EmployeeTokenForPage } from "./EmployeeTokenForPage";
 import { ProjectCard } from "./ProjectCard";
 
 interface State {
-  projects: ProjectInterfaceWithAllData[];
   employee: EmployeeInterface;
 }
 
-export function EmployeeProfile(): JSX.Element {
-  const location = useLocation();
-  const { projects, employee } = location.state as State;
+interface EmployeeProfileProps {
+  projects: ProjectInterfaceWithAllData[];
+}
 
-  const thisEmployeesProjects = projects.filter((project) =>
-    project.employees.includes(employee)
-  );
+export function EmployeeProfile({
+  projects,
+}: EmployeeProfileProps): JSX.Element {
+  const location = useLocation();
+  const { employee } = location.state as State;
+
+  //Can't do .includes as the objects are not the referencing same place in memory. Filter would return nothing
+  const thisEmployeesProjects = projects.filter((project) => {
+    const didFind = project.employees.find(
+      (currEmployee) => currEmployee.id === employee.id
+    );
+    return didFind ? true : false;
+  });
 
   const thisEmployeesProjectsCards: JSX.Element[] = thisEmployeesProjects.map(
-    (project) => (
-      <ProjectCard key={project.id} project={project} projects={projects} />
-    )
+    (project) => <ProjectCard key={project.id} project={project} />
   );
 
   return (
