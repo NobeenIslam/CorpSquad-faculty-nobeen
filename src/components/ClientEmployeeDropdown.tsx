@@ -45,7 +45,7 @@ export function ClientEmployeeDropdown({
       <div className="row justify-content-center">
         <select
           value={dashboardState.clientSearch}
-          className="btn btn-light mb-2"
+          className="btn btn-secondary mb-2"
           onChange={(e) => {
             dashboardDispatch({
               type: dashboardActionsLibrary.SET_CLIENT_SEARCH,
@@ -62,7 +62,7 @@ export function ClientEmployeeDropdown({
         {" "}
         <select
           value={dashboardState.employeeSearch}
-          className="btn btn-light"
+          className="btn btn-secondary"
           onChange={(e) => {
             dashboardDispatch({
               type: dashboardActionsLibrary.SET_EMPLOYEE_SEARCH,

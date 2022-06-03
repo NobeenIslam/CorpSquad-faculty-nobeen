@@ -19,7 +19,7 @@ export function FilterControls({
 }: FilterControlsProps): JSX.Element {
   return (
     <>
-      <div className="row justify-content-center purple ">
+      <div className="row justify-content-center mb-2">
         {" "}
         <button
           className=" btn btn-danger "
@@ -35,13 +35,13 @@ export function FilterControls({
       </div>
 
       <section className="row align-items-center">
-        <div className="col-xl-3 col-lg-6 justify-content-center blue">
+        <div className="col-xl-3 col-lg-6 justify-content-center mb-2">
           <ClientEmployeeDropdown
             dashboardState={dashboardState}
             dashboardDispatch={dashboardDispatch}
           />
         </div>
-        <div className="col-xl-3 col-lg-6  justify-content-center yellow">
+        <div className="col-xl-3 col-lg-6  justify-content-center mb-2">
           <DateSortButtons
             dashboardState={dashboardState}
             dashboardDispatch={dashboardDispatch}

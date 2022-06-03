@@ -53,39 +53,62 @@ export function DateSortButtons({
 
   return (
     <>
-      <button
-        className={
-          "btn btn-primary  active" +
-          setClassForSortButtonsIfActive(dashboardState.dateSortToggles[0])
-        }
-        onClick={() => handleSortByDate(activateMostRecentStartDate)}
-      >
-        Sort by StartDate (Most Recent First)
-      </button>
-      <button
-        className={setClassForSortButtonsIfActive(
-          dashboardState.dateSortToggles[1]
-        )}
-        onClick={() => handleSortByDate(activateOldestStartDate)}
-      >
-        Sort by StartDate (Oldest First)
-      </button>
-      <button
-        className={setClassForSortButtonsIfActive(
-          dashboardState.dateSortToggles[2]
-        )}
-        onClick={() => handleSortByDate(activateMostRecentEndDate)}
-      >
-        Sort by EndDate (Most Recent First)
-      </button>
-      <button
-        className={setClassForSortButtonsIfActive(
-          dashboardState.dateSortToggles[3]
-        )}
-        onClick={() => handleSortByDate(activateOldestEndDate)}
-      >
-        Sort by EndDate (Oldest First)
-      </button>
+      <div className="row justify-content-center mb-2">
+        {" "}
+        <button
+          className={
+            "btn btn-primary" +
+            setClassForSortButtonsIfActive(dashboardState.dateSortToggles[0])
+          }
+          type="button"
+          data-bs-toggle="button"
+          onClick={() => handleSortByDate(activateMostRecentStartDate)}
+        >
+          Sort by StartDate (Most Recent First)
+        </button>
+      </div>
+      <div className="row justify-content-center mb-2">
+        {" "}
+        <button
+          className={
+            "btn btn-primary" +
+            setClassForSortButtonsIfActive(dashboardState.dateSortToggles[1])
+          }
+          type="button"
+          data-bs-toggle="button"
+          onClick={() => handleSortByDate(activateOldestStartDate)}
+        >
+          Sort by StartDate (Oldest First)
+        </button>
+      </div>
+      <div className="row justify-content-center mb-2">
+        {" "}
+        <button
+          className={
+            "btn btn-primary" +
+            setClassForSortButtonsIfActive(dashboardState.dateSortToggles[2])
+          }
+          type="button"
+          data-bs-toggle="button"
+          onClick={() => handleSortByDate(activateMostRecentEndDate)}
+        >
+          Sort by EndDate (Most Recent First)
+        </button>
+      </div>
+      <div className="row justify-content-center">
+        {" "}
+        <button
+          className={
+            "btn btn-primary" +
+            setClassForSortButtonsIfActive(dashboardState.dateSortToggles[3])
+          }
+          type="button"
+          data-bs-toggle="button"
+          onClick={() => handleSortByDate(activateOldestEndDate)}
+        >
+          Sort by EndDate (Oldest First)
+        </button>
+      </div>
     </>
   );
 }
