@@ -84,7 +84,7 @@ export function Dashboard({
     //eslint-disable-next-line
   }, []);
 
-  console.log(dashboardState);
+  //console.log(dashboardState);
 
   const aggregateRevenue = sumAllRevenues(dashboardState.projects);
 
