@@ -1,4 +1,4 @@
-import { useEffect, useReducer } from "react";
+import { useEffect } from "react";
 import { addAllDataToProjects } from "../utils/unitFunctions/addAllDataToProjects";
 
 import {
@@ -20,9 +20,9 @@ import {
   FilterControls,
 } from "./FilterControls";
 import {
+  DashboardActions,
   dashboardActionsLibrary,
-  dashboardReducer,
-  initialDashboardState,
+  DashboardState,
 } from "../utils/reducerStateManagement/dashboardManager";
 import {
   mostRecentEndDateFirst,
@@ -49,14 +49,15 @@ import {
   sortRevenueDescending,
 } from "../utils/unitFunctions/sortRevenueFunctions";
 
-export function Dashboard(): JSX.Element {
-  const [dashboardState, dashboardDispatch] = useReducer(
-    dashboardReducer,
-    initialDashboardState
-  );
+interface DashboardProps {
+  dashboardState: DashboardState;
+  dashboardDispatch: React.Dispatch<DashboardActions>;
+}
 
-  console.log(dashboardState);
-
+export function Dashboard({
+  dashboardState,
+  dashboardDispatch,
+}: DashboardProps): JSX.Element {
   useEffect(() => {
     async function fetchAllData() {
       const projects: ProjectInterface[] = await fetchProjects();

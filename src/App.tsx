@@ -1,16 +1,34 @@
+import { useReducer } from "react";
 import { Routes, Route } from "react-router-dom";
 import { ClientProfile } from "./components/ClientProfile";
 import { Dashboard } from "./components/Dashboard";
 import { EmployeeProfile } from "./components/EmployeeProfile";
 import { Footer } from "./components/Footer";
 import { NavBar } from "./components/NavBar";
+import {
+  dashboardReducer,
+  initialDashboardState,
+} from "./utils/reducerStateManagement/dashboardManager";
 
-function App(): JSX.Element {
+export default function App(): JSX.Element {
+  const [dashboardState, dashboardDispatch] = useReducer(
+    dashboardReducer,
+    initialDashboardState
+  );
+
   return (
     <>
       <NavBar />
       <Routes>
-        <Route path="/" element={<Dashboard />}></Route>
+        <Route
+          path="/"
+          element={
+            <Dashboard
+              dashboardState={dashboardState}
+              dashboardDispatch={dashboardDispatch}
+            />
+          }
+        ></Route>
         <Route path="/clients/:clientId" element={<ClientProfile />}></Route>
         <Route
           path="/employees/:employeeId"
@@ -21,5 +39,3 @@ function App(): JSX.Element {
     </>
   );
 }
-
-export default App;
