@@ -61,6 +61,7 @@ export function FilterControls({
     []
   );
 
+  /*There are some employees which have not worked on a project, so better to fetch from employees directly, rather than getting list of names from full projects data*/
   const clientNames = filterControlsState.clients
     .map((client) => client.name)
     .sort();
