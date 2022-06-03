@@ -2,11 +2,15 @@ import { Link } from "react-router-dom";
 
 export function NavBar(): JSX.Element {
   return (
-    <div className="navBar">
-      <div className="homeLink">
-        <Link to="/">Back to Dashboard</Link>
+    <div className="navbar navbar-default navbar-dark bg-dark">
+      <div className="container-fluid">
+        <ul className="navbar-nav">
+          <li className="nav-item">
+            <Link to="/">Back to Dashboard</Link>
+          </li>
+        </ul>
+        <div className="navbar-brand navbar-right">Corpfolio</div>
       </div>
-      <div className="logo">Corpfolio</div>
     </div>
   );
 }

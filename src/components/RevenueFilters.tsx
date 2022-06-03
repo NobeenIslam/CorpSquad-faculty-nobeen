@@ -7,7 +7,8 @@ import { setClassForSortButtonsIfActive } from "../utils/unitFunctions/setClassF
 import {
   activateSortRevenueAscending,
   activateSortRevenueDescending,
-} from "./FilterControls";
+} from "./ClientEmployeeDropdown";
+import {} from "./FilterControls";
 
 interface RevnueFiltersProps {
   dashboardState: DashboardState;
@@ -77,32 +78,52 @@ export function RevenueFilters({
 
   return (
     <>
-      <button
-        className={setClassForSortButtonsIfActive(
-          dashboardState.revenueSortToggles[0]
-        )}
-        onClick={() => handleSortByRevenue(activateSortRevenueAscending)}
-      >
-        Sort by Revenue (Ascending)
-      </button>
-      <button
-        className={setClassForSortButtonsIfActive(
-          dashboardState.revenueSortToggles[1]
-        )}
-        onClick={() => handleSortByRevenue(activateSortRevenueDescending)}
-      >
-        Sort by Revenue (Descending)
-      </button>
-      <input
-        placeholder="Find revenues > Search"
-        value={dashboardState.greaterRevenueSearch}
-        onChange={(e) => handleSearchGreatRevenue(e)}
-      ></input>
-      <input
-        placeholder="Find revenues < Search"
-        value={dashboardState.lesserRevenueSearch}
-        onChange={(e) => handleSearchLesserRevenue(e)}
-      ></input>
+      <div className="row justify-content-center mb-2">
+        {" "}
+        <button
+          className={
+            "btn btn-primary" +
+            setClassForSortButtonsIfActive(dashboardState.revenueSortToggles[0])
+          }
+          type="button"
+          data-bs-toggle="button"
+          onClick={() => handleSortByRevenue(activateSortRevenueAscending)}
+        >
+          Sort by Revenue (Ascending)
+        </button>
+      </div>
+      <div className="row justify-content-center mb-2">
+        {" "}
+        <button
+          className={
+            "btn btn-primary" +
+            setClassForSortButtonsIfActive(dashboardState.revenueSortToggles[1])
+          }
+          type="button"
+          data-bs-toggle="button"
+          onClick={() => handleSortByRevenue(activateSortRevenueDescending)}
+        >
+          Sort by Revenue (Descending)
+        </button>
+      </div>
+      <div className="row justify-content-center mb-2">
+        {" "}
+        <input
+          className="form-control"
+          placeholder="Find revenues > Search"
+          value={dashboardState.greaterRevenueSearch}
+          onChange={(e) => handleSearchGreatRevenue(e)}
+        ></input>
+      </div>
+      <div className="row justify-content-center">
+        {" "}
+        <input
+          className="form-control"
+          placeholder="Find revenues < Search"
+          value={dashboardState.lesserRevenueSearch}
+          onChange={(e) => handleSearchLesserRevenue(e)}
+        ></input>
+      </div>
     </>
   );
 }

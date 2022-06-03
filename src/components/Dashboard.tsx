@@ -14,11 +14,7 @@ import {
 } from "../utils/Interfaces";
 import { sumAllRevenues } from "../utils/unitFunctions/sumAllRevenues";
 import { ProjectCard } from "./ProjectCard";
-import {
-  activateSortRevenueAscending,
-  activateSortRevenueDescending,
-  FilterControls,
-} from "./FilterControls";
+import { FilterControls } from "./FilterControls";
 import {
   DashboardActions,
   dashboardActionsLibrary,
@@ -48,6 +44,10 @@ import {
   sortRevenueAscending,
   sortRevenueDescending,
 } from "../utils/unitFunctions/sortRevenueFunctions";
+import {
+  activateSortRevenueAscending,
+  activateSortRevenueDescending,
+} from "./ClientEmployeeDropdown";
 
 interface DashboardProps {
   dashboardState: DashboardState;
@@ -208,9 +208,13 @@ export function Dashboard({
 
   return (
     <>
-      <main className="mainContent">
-        <h1 className="title">Aggregate Revenue: £{aggregateRevenue}</h1>
-        <h2>Projects Found: {filteredProjects.length}</h2>
+      <main className="container col justify-content-center mt-4 ">
+        <h1 className="row justify-content-center">
+          Aggregate Revenue: £{aggregateRevenue}
+        </h1>
+        <h2 className="row justify-content-center mb-4">
+          Projects Found: {filteredProjects.length}
+        </h2>
         <FilterControls
           dashboardState={dashboardState}
           dashboardDispatch={dashboardDispatch}
