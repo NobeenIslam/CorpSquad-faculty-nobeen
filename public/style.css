@@ -21,9 +21,33 @@
     flex-direction: column;
 }
 
+.mainContent>h2{
+    margin:50px auto;
+}
+
 .mainContent> .title{
     margin: auto;
     margin-bottom: 5px;
+}
+
+/*For filter Controls*/
+.mainContent>.resetButton{
+    width:90%;
+    margin: 20px auto;
+
+}
+.mainContent>.filterControls{
+    display: flex;
+    flex-direction: row;
+    margin-bottom: 10px;
+}
+
+.mainContent>.filterControls>.flexColumnContainer{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    width: 15%;
+    margin:auto
 }
 /* DashBoard classes and flexContainers */
 /*Note that dashboard is a child of mainContent also, Excluded for brevity*/

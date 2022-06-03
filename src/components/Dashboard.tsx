@@ -203,8 +203,7 @@ export function Dashboard({
     <>
       <main className="mainContent">
         <h1 className="title">Aggregate Revenue: £{aggregateRevenue}</h1>
-        <h2>Filter Projects:</h2>
-        <div>Projects Found: {filteredProjects.length}</div>
+        <h2>Projects Found: {filteredProjects.length}</h2>
         <FilterControls
           dashboardState={dashboardState}
           dashboardDispatch={dashboardDispatch}
