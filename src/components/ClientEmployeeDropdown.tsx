@@ -42,32 +42,39 @@ export function ClientEmployeeDropdown({
   );
   return (
     <>
-      <select
-        value={dashboardState.clientSearch}
-        onChange={(e) => {
-          dashboardDispatch({
-            type: dashboardActionsLibrary.SET_CLIENT_SEARCH,
-            payload: { ...dashboardState, clientSearch: e.target.value },
-            //Send a payload which keeps all other states the same but updates clientSearch according to the selected option value
-          });
-        }}
-      >
-        <option>Select a Client...</option>
-        {clientNamesOptions}
-      </select>
-      <select
-        value={dashboardState.employeeSearch}
-        onChange={(e) => {
-          dashboardDispatch({
-            type: dashboardActionsLibrary.SET_EMPLOYEE_SEARCH,
-            payload: { ...dashboardState, employeeSearch: e.target.value },
-            //Send a payload which keeps all other states the same but updates clientSearch according to the selected option value
-          });
-        }}
-      >
-        <option>Select an Employee...</option>
-        {employeeNamesOptions}
-      </select>
+      <div className="row justify-content-center">
+        <select
+          value={dashboardState.clientSearch}
+          className="btn btn-light mb-2"
+          onChange={(e) => {
+            dashboardDispatch({
+              type: dashboardActionsLibrary.SET_CLIENT_SEARCH,
+              payload: { ...dashboardState, clientSearch: e.target.value },
+              //Send a payload which keeps all other states the same but updates clientSearch according to the selected option value
+            });
+          }}
+        >
+          <option>Select a Client...</option>
+          {clientNamesOptions}
+        </select>
+      </div>
+      <div className="row justify-content-center">
+        {" "}
+        <select
+          value={dashboardState.employeeSearch}
+          className="btn btn-light"
+          onChange={(e) => {
+            dashboardDispatch({
+              type: dashboardActionsLibrary.SET_EMPLOYEE_SEARCH,
+              payload: { ...dashboardState, employeeSearch: e.target.value },
+              //Send a payload which keeps all other states the same but updates clientSearch according to the selected option value
+            });
+          }}
+        >
+          <option>Select an Employee...</option>
+          {employeeNamesOptions}
+        </select>
+      </div>
     </>
   );
 }

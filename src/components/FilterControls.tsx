@@ -34,26 +34,26 @@ export function FilterControls({
         </button>
       </div>
 
-      <section className="row align-items-center red">
-        <div className="col-md-3 col-sm-6 justify-content-center blue">
+      <section className="row align-items-center">
+        <div className="col-xl-3 col-lg-6 justify-content-center blue">
           <ClientEmployeeDropdown
             dashboardState={dashboardState}
             dashboardDispatch={dashboardDispatch}
           />
         </div>
-        <div className="col-md-3 col-sm-6 justify-content-center yellow">
+        <div className="col-xl-3 col-lg-6  justify-content-center yellow">
           <DateSortButtons
             dashboardState={dashboardState}
             dashboardDispatch={dashboardDispatch}
           />
         </div>
-        <div className="col-md-3 col-sm-6 justify-content-center green">
+        <div className="col-xl-3 col-lg-6  justify-content-center green">
           <DatePickerFilters
             dashboardState={dashboardState}
             dashboardDispatch={dashboardDispatch}
           />
         </div>
-        <div className="col-md-3 col-sm-6 justify-content-center  orange">
+        <div className="col-xl-3 col-lg-6  justify-content-center  orange">
           <RevenueFilters
             dashboardState={dashboardState}
             dashboardDispatch={dashboardDispatch}
