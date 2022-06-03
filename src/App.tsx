@@ -35,7 +35,7 @@ export default function App(): JSX.Element {
         ></Route>
         <Route
           path="/employees/:employeeId"
-          element={<EmployeeProfile dashboardState={dashboardState} />} //Still has useLocation for employees which isn't in dashboardState
+          element={<EmployeeProfile dashboardState={dashboardState} />} 
         ></Route>
       </Routes>
       <Footer />
