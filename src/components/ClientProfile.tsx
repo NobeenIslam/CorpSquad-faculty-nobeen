@@ -3,6 +3,7 @@ import { getClientsEmployees } from "../utils/unitFunctions/getClientsEmployees"
 import { ProjectInterfaceWithAllData } from "../utils/Interfaces";
 import { EmployeeToken } from "./EmployeeToken";
 import { ProjectCard } from "./ProjectCard";
+import { sortByEmployeeName } from "../utils/unitFunctions/sortByEmployeeName";
 
 export function ClientProfile(): JSX.Element {
   const { clientId } = useParams();
@@ -13,7 +14,9 @@ export function ClientProfile(): JSX.Element {
     (project) => clientId === project.clientId
   );
   const thisClientsName = thisClientsProjects[0].clientName;
-  const thisClientsEmployees = getClientsEmployees(thisClientsProjects);
+  const thisClientsEmployees = getClientsEmployees(thisClientsProjects).sort(
+    (e1, e2) => sortByEmployeeName(e1, e2)
+  );
 
   const thisClientsProjectCards: JSX.Element[] = thisClientsProjects.map(
     (project) => (
