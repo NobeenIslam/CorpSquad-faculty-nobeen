@@ -59,7 +59,7 @@ export function Dashboard({
   dashboardDispatch,
 }: DashboardProps): JSX.Element {
   useEffect(() => {
-    async function fetchAllData() {
+    async function fetchAndQueueStoreAllData() {
       const projects: ProjectInterface[] = await fetchProjects();
       const clients: ClientInterface[] = await fetchClients();
       const employees: EmployeeInterface[] = await fetchEmployees();
@@ -68,16 +68,23 @@ export function Dashboard({
         addAllDataToProjects(projects, clients, employees);
 
       dashboardDispatch({
-        type: dashboardActionsLibrary.SET_PROJECTS,
-        payload: { ...dashboardState, projects: projectsWithAllInfo },
+        type: dashboardActionsLibrary.SET_DATA,
+        payload: {
+          ...dashboardState,
+          projects: projectsWithAllInfo,
+          clients: clients,
+          employees: employees,
+        },
       });
       //In dispatch send a payload which keeps all other states the same and only sends the new "projects" information we want to update
     }
 
-    fetchAllData();
+    fetchAndQueueStoreAllData();
     //Disabling as it is saying to put clients,projects and employees in which would cause an infinite loop
     //eslint-disable-next-line
   }, []);
+
+  //console.log(dashboardState);
 
   const aggregateRevenue = sumAllRevenues(dashboardState.projects);
 

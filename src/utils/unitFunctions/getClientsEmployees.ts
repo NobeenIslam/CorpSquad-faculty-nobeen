@@ -16,5 +16,6 @@ export function getClientsEmployees(
       return thisClientsEmployeesWithDuplicates.indexOf(employee) === index;
     }
   );
+  //Checks if index of first occurence = current index. if not it's a duplicate
   return thisClientsEmployeesUnique;
 }

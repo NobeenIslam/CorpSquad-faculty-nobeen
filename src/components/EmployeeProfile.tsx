@@ -1,29 +1,24 @@
-import { useLocation } from "react-router-dom";
-import {
-  EmployeeInterface,
-  ProjectInterfaceWithAllData,
-} from "../utils/Interfaces";
+import { useParams } from "react-router-dom";
+import { DashboardState } from "../utils/reducerStateManagement/dashboardManager";
 import { EmployeeTokenForPage } from "./EmployeeTokenForPage";
 import { ProjectCard } from "./ProjectCard";
 
-interface State {
-  employee: EmployeeInterface;
-}
-
 interface EmployeeProfileProps {
-  projects: ProjectInterfaceWithAllData[];
+  dashboardState: DashboardState;
 }
 
 export function EmployeeProfile({
-  projects,
+  dashboardState,
 }: EmployeeProfileProps): JSX.Element {
-  const location = useLocation();
-  const { employee } = location.state as State;
+  const thisEmployeeId = useParams().employeeId;
+  const thisEmployee = dashboardState.employees.find(
+    (employee) => employee.id === thisEmployeeId
+  );
 
   //Can't do .includes as the objects are not the referencing same place in memory. Filter would return nothing
-  const thisEmployeesProjects = projects.filter((project) => {
+  const thisEmployeesProjects = dashboardState.projects.filter((project) => {
     const didFind = project.employees.find(
-      (currEmployee) => currEmployee.id === employee.id
+      (currEmployee) => currEmployee.id === thisEmployeeId
     );
     return didFind ? true : false;
   });
@@ -34,7 +29,11 @@ export function EmployeeProfile({
 
   return (
     <main className="mainContent">
-      <EmployeeTokenForPage employee={employee} />
+      {thisEmployee !== undefined ? (
+        <EmployeeTokenForPage employee={thisEmployee} />
+      ) : (
+        <div>Employee Not Found</div>
+      )}
       <section className="dashboard">{thisEmployeesProjectsCards}</section>
     </main>
   );

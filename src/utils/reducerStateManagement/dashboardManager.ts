@@ -1,8 +1,12 @@
-import { ProjectInterfaceWithAllData } from "../Interfaces";
+import {
+  ClientInterface,
+  EmployeeInterface,
+  ProjectInterfaceWithAllData,
+} from "../Interfaces";
 
 //To protect against string typos and hard-coded strings everywhere in the code
 export const dashboardActionsLibrary = {
-  SET_PROJECTS: "SET_PROJECTS",
+  SET_DATA: "SET_DATA",
   SET_CLIENT_SEARCH: "SET_CLIENT_SEARCH",
   SET_EMPLOYEE_SEARCH: "SET_EMPLOYEE_SEARCH",
   TOGGLE_DATE_SORT: "TOGGLE_DATE_SORT",
@@ -18,6 +22,8 @@ export const dashboardActionsLibrary = {
 
 export interface DashboardState {
   projects: ProjectInterfaceWithAllData[];
+  clients: ClientInterface[];
+  employees: EmployeeInterface[];
   clientSearch: string;
   employeeSearch: string;
   dateSortToggles: string[];
@@ -34,6 +40,8 @@ export interface DashboardState {
  */
 export const initialDashboardState: DashboardState = {
   projects: [],
+  clients: [],
+  employees: [],
   clientSearch: "Select a Client...",
   employeeSearch: "Select an Employee...",
   dateSortToggles: ["active", "inactive", "inactive", "inactive"],
@@ -56,8 +64,13 @@ export function dashboardReducer(
   action: DashboardActions
 ): DashboardState {
   switch (action.type) {
-    case dashboardActionsLibrary.SET_PROJECTS: {
-      return { ...state, projects: action.payload.projects }; //Keep all other state variables the same and only update projects
+    case dashboardActionsLibrary.SET_DATA: {
+      return {
+        ...state,
+        projects: action.payload.projects,
+        clients: action.payload.clients,
+        employees: action.payload.employees,
+      };
     }
     case dashboardActionsLibrary.SET_CLIENT_SEARCH: {
       return { ...state, clientSearch: action.payload.clientSearch };
@@ -69,7 +82,7 @@ export function dashboardReducer(
       return {
         ...state,
         dateSortToggles: action.payload.dateSortToggles,
-        revenueSortToggles: action.payload.revenueSortToggles,
+        revenueSortToggles: action.payload.revenueSortToggles, //Sets it blank
       };
     }
     case dashboardActionsLibrary.SET_AFTER_START_DATE_SEARCH: {
@@ -119,7 +132,9 @@ export function dashboardReducer(
       const resetSate = {
         ...initialDashboardState,
         projects: action.payload.projects,
-      }; //Reset all filters but keep projects as the full array we're working with
+        clients: action.payload.clients,
+        employees: action.payload.employees,
+      }; //Reset all filters but keep projects,clients,employees as the full array we're working with
       return resetSate;
     }
     default: {

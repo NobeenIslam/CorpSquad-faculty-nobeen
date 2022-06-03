@@ -1,18 +1,20 @@
 import { useParams } from "react-router-dom";
 import { getClientsEmployees } from "../utils/unitFunctions/getClientsEmployees";
-import { ProjectInterfaceWithAllData } from "../utils/Interfaces";
 import { EmployeeToken } from "./EmployeeToken";
 import { ProjectCard } from "./ProjectCard";
 import { sortByEmployeeName } from "../utils/unitFunctions/sortByEmployeeName";
+import { DashboardState } from "../utils/reducerStateManagement/dashboardManager";
 
 interface ClientProfileProps {
-  projects: ProjectInterfaceWithAllData[];
+  dashboardState: DashboardState;
 }
 
-export function ClientProfile({ projects }: ClientProfileProps): JSX.Element {
+export function ClientProfile({
+  dashboardState,
+}: ClientProfileProps): JSX.Element {
   const { clientId } = useParams();
 
-  const thisClientsProjects = projects.filter(
+  const thisClientsProjects = dashboardState.projects.filter(
     (project) => clientId === project.clientId
   );
   const thisClientsName = thisClientsProjects[0].clientName;
