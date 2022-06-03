@@ -88,6 +88,7 @@ export function FilterControls({
   return (
     <>
       <button
+        className="resetButton"
         onClick={() =>
           dashboardDispatch({
             type: dashboardActionsLibrary.RESET_FITLERS,
@@ -97,44 +98,54 @@ export function FilterControls({
       >
         Reset Filters
       </button>
-      <select
-        value={dashboardState.clientSearch}
-        onChange={(e) => {
-          dashboardDispatch({
-            type: dashboardActionsLibrary.SET_CLIENT_SEARCH,
-            payload: { ...dashboardState, clientSearch: e.target.value },
-            //Send a payload which keeps all other states the same but updates clientSearch according to the selected option value
-          });
-        }}
-      >
-        <option>Select a Client...</option>
-        {clientNamesOptions}
-      </select>
-      <select
-        value={dashboardState.employeeSearch}
-        onChange={(e) => {
-          dashboardDispatch({
-            type: dashboardActionsLibrary.SET_EMPLOYEE_SEARCH,
-            payload: { ...dashboardState, employeeSearch: e.target.value },
-            //Send a payload which keeps all other states the same but updates clientSearch according to the selected option value
-          });
-        }}
-      >
-        <option>Select an Employee...</option>
-        {employeeNamesOptions}
-      </select>
-      <DateSortButtons
-        dashboardState={dashboardState}
-        dashboardDispatch={dashboardDispatch}
-      />
-      <DatePickerFilters
-        dashboardState={dashboardState}
-        dashboardDispatch={dashboardDispatch}
-      />
-      <RevenueFilters
-        dashboardState={dashboardState}
-        dashboardDispatch={dashboardDispatch}
-      />
+      <section className="filterControls">
+        <div className="flexColumnContainer">
+          <select
+            value={dashboardState.clientSearch}
+            onChange={(e) => {
+              dashboardDispatch({
+                type: dashboardActionsLibrary.SET_CLIENT_SEARCH,
+                payload: { ...dashboardState, clientSearch: e.target.value },
+                //Send a payload which keeps all other states the same but updates clientSearch according to the selected option value
+              });
+            }}
+          >
+            <option>Select a Client...</option>
+            {clientNamesOptions}
+          </select>
+          <select
+            value={dashboardState.employeeSearch}
+            onChange={(e) => {
+              dashboardDispatch({
+                type: dashboardActionsLibrary.SET_EMPLOYEE_SEARCH,
+                payload: { ...dashboardState, employeeSearch: e.target.value },
+                //Send a payload which keeps all other states the same but updates clientSearch according to the selected option value
+              });
+            }}
+          >
+            <option>Select an Employee...</option>
+            {employeeNamesOptions}
+          </select>
+        </div>
+        <div className="flexColumnContainer">
+          <DateSortButtons
+            dashboardState={dashboardState}
+            dashboardDispatch={dashboardDispatch}
+          />
+        </div>
+        <div className="flexColumnContainer">
+          <DatePickerFilters
+            dashboardState={dashboardState}
+            dashboardDispatch={dashboardDispatch}
+          />
+        </div>
+        <div className="flexColumnContainer">
+          <RevenueFilters
+            dashboardState={dashboardState}
+            dashboardDispatch={dashboardDispatch}
+          />
+        </div>
+      </section>
     </>
   );
 }
