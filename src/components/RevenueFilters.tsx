@@ -94,12 +94,12 @@ export function RevenueFilters({
         Sort by Revenue (Descending)
       </button>
       <input
-        placeholder="Search for a revenue greater than..."
+        placeholder="Find revenues > Search"
         value={dashboardState.greaterRevenueSearch}
         onChange={(e) => handleSearchGreatRevenue(e)}
       ></input>
       <input
-        placeholder="Search for a revenue less than..."
+        placeholder="Find revenues < Search"
         value={dashboardState.lesserRevenueSearch}
         onChange={(e) => handleSearchLesserRevenue(e)}
       ></input>
