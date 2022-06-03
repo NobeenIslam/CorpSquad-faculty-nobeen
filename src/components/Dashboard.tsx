@@ -212,7 +212,7 @@ export function Dashboard({
         <h1 className="row justify-content-center">
           Aggregate Revenue: £{aggregateRevenue}
         </h1>
-        <h2 className="row justify-content-center">
+        <h2 className="row justify-content-center mb-4">
           Projects Found: {filteredProjects.length}
         </h2>
         <FilterControls
