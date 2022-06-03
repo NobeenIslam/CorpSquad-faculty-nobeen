@@ -208,7 +208,7 @@ export function Dashboard({
 
   return (
     <>
-      <main className="container col ">
+      <main className="container col justify-content-center mt-4 ">
         <h1 className="row justify-content-center">
           Aggregate Revenue: £{aggregateRevenue}
         </h1>
