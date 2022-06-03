@@ -7,7 +7,8 @@ import { setClassForSortButtonsIfActive } from "../utils/unitFunctions/setClassF
 import {
   activateSortRevenueAscending,
   activateSortRevenueDescending,
-} from "./FilterControls";
+} from "./ClientEmployeeDropdown";
+import {} from "./FilterControls";
 
 interface RevnueFiltersProps {
   dashboardState: DashboardState;

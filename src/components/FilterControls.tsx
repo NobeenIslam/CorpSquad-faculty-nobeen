@@ -3,6 +3,7 @@ import {
   dashboardActionsLibrary,
   DashboardState,
 } from "../utils/reducerStateManagement/dashboardManager";
+import { ClientEmployeeDropdown } from "./ClientEmployeeDropdown";
 import { DatePickerFilters } from "./DatePickerFilters";
 import { DateSortButtons } from "./DateSortButtons";
 import { RevenueFilters } from "./RevenueFilters";
@@ -12,93 +13,47 @@ interface FilterControlsProps {
   dashboardDispatch: React.Dispatch<DashboardActions>;
 }
 
-export const activateSortRevenueAscending = ["active", "inactive"];
-export const activateSortRevenueDescending = ["inactive", "active"];
-
 export function FilterControls({
   dashboardState,
   dashboardDispatch,
 }: FilterControlsProps): JSX.Element {
-  /*There are some employees which have not worked on a project, so better to fetch from employees directly, rather than getting list of names from full projects data*/
-  const clientNames = dashboardState.clients
-    .map((client) => client.name)
-    .sort();
-
-  const employeeNames = dashboardState.employees
-    .map((employee) => employee.name)
-    .sort();
-
-  const clientNamesOptions: JSX.Element[] = clientNames.map(
-    (clientName, index) => (
-      <option key={index} value={clientName}>
-        {clientName}
-      </option>
-    )
-  );
-
-  const employeeNamesOptions: JSX.Element[] = employeeNames.map(
-    (employeeName, index) => (
-      <option key={index} value={employeeName}>
-        {employeeName}
-      </option>
-    )
-  );
-
   return (
     <>
-      <button
-        className="resetButton"
-        onClick={() =>
-          dashboardDispatch({
-            type: dashboardActionsLibrary.RESET_FITLERS,
-            payload: dashboardState,
-          })
-        }
-      >
-        Reset Filters
-      </button>
-      <section className="filterControls">
-        <div className="flexColumnContainer">
-          <select
-            value={dashboardState.clientSearch}
-            onChange={(e) => {
-              dashboardDispatch({
-                type: dashboardActionsLibrary.SET_CLIENT_SEARCH,
-                payload: { ...dashboardState, clientSearch: e.target.value },
-                //Send a payload which keeps all other states the same but updates clientSearch according to the selected option value
-              });
-            }}
-          >
-            <option>Select a Client...</option>
-            {clientNamesOptions}
-          </select>
-          <select
-            value={dashboardState.employeeSearch}
-            onChange={(e) => {
-              dashboardDispatch({
-                type: dashboardActionsLibrary.SET_EMPLOYEE_SEARCH,
-                payload: { ...dashboardState, employeeSearch: e.target.value },
-                //Send a payload which keeps all other states the same but updates clientSearch according to the selected option value
-              });
-            }}
-          >
-            <option>Select an Employee...</option>
-            {employeeNamesOptions}
-          </select>
+      <div className="row justify-content-center purple ">
+        {" "}
+        <button
+          className=" btn btn-danger "
+          onClick={() =>
+            dashboardDispatch({
+              type: dashboardActionsLibrary.RESET_FITLERS,
+              payload: dashboardState,
+            })
+          }
+        >
+          Reset Filters
+        </button>
+      </div>
+
+      <section className="row align-items-center red">
+        <div className="col-md-3 col-sm-6 justify-content-center blue">
+          <ClientEmployeeDropdown
+            dashboardState={dashboardState}
+            dashboardDispatch={dashboardDispatch}
+          />
         </div>
-        <div className="flexColumnContainer">
+        <div className="col-md-3 col-sm-6 justify-content-center yellow">
           <DateSortButtons
             dashboardState={dashboardState}
             dashboardDispatch={dashboardDispatch}
           />
         </div>
-        <div className="flexColumnContainer">
+        <div className="col-md-3 col-sm-6 justify-content-center green">
           <DatePickerFilters
             dashboardState={dashboardState}
             dashboardDispatch={dashboardDispatch}
           />
         </div>
-        <div className="flexColumnContainer">
+        <div className="col-md-3 col-sm-6 justify-content-center  orange">
           <RevenueFilters
             dashboardState={dashboardState}
             dashboardDispatch={dashboardDispatch}

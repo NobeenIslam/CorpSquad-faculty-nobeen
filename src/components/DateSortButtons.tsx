@@ -54,9 +54,10 @@ export function DateSortButtons({
   return (
     <>
       <button
-        className={setClassForSortButtonsIfActive(
-          dashboardState.dateSortToggles[0]
-        )}
+        className={
+          "btn btn-primary  active" +
+          setClassForSortButtonsIfActive(dashboardState.dateSortToggles[0])
+        }
         onClick={() => handleSortByDate(activateMostRecentStartDate)}
       >
         Sort by StartDate (Most Recent First)
