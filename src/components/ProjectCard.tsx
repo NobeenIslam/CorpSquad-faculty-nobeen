@@ -1,19 +1,20 @@
 import { ProjectInterfaceWithAllData } from "../utils/Interfaces";
 import { EmployeeToken } from "./EmployeeToken";
 import { Link } from "react-router-dom";
+import { sortByEmployeeName } from "../utils/unitFunctions/sortByEmployeeName";
 
 interface ProjectCardProps {
   project: ProjectInterfaceWithAllData;
-  projects: ProjectInterfaceWithAllData[]; //Passing down to children so it can be used in EmployeeToken Link
 }
 
-export function ProjectCard({
-  project,
-  projects,
-}: ProjectCardProps): JSX.Element {
-  const employeeTokens: JSX.Element[] = project.employees.map((employee) => (
-    <EmployeeToken key={employee.id} employee={employee} projects={projects} />
-  ));
+export function ProjectCard({ project }: ProjectCardProps): JSX.Element {
+  const alphabeticalEmployees = project.employees.sort((e1, e2) =>
+    sortByEmployeeName(e1, e2)
+  );
+
+  const employeeTokens: JSX.Element[] = alphabeticalEmployees.map(
+    (employee) => <EmployeeToken key={employee.id} employee={employee} />
+  );
 
   return (
     <section className="projectCard">
@@ -24,9 +25,7 @@ export function ProjectCard({
       </div>
       <div>
         <b>Client:</b>{" "}
-        <Link to={`/clients/${project.clientId}`} state={projects}>
-          {project.clientName}
-        </Link>
+        <Link to={`/clients/${project.clientId}`}>{project.clientName}</Link>
       </div>
       <div>
         <b>Revenue:</b> £{project.contract.size}

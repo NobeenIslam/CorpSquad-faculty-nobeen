@@ -196,11 +196,7 @@ export function Dashboard({
   }
 
   const projectCards: JSX.Element[] = filteredProjects.map((project) => (
-    <ProjectCard
-      key={project.id}
-      project={project}
-      projects={dashboardState.projects}
-    />
+    <ProjectCard key={project.id} project={project} />
   ));
 
   return (
