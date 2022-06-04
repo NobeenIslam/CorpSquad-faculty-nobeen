@@ -219,9 +219,7 @@ export function Dashboard({
           dashboardState={dashboardState}
           dashboardDispatch={dashboardDispatch}
         />
-        <section className="container col justify-content-center">
-          {projectCards}
-        </section>
+        <section className="d-flex flex-column mx-5 ">{projectCards}</section>
       </main>
     </>
   );

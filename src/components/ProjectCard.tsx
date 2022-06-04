@@ -33,7 +33,7 @@ export function ProjectCard({ project }: ProjectCardProps): JSX.Element {
           <b>Revenue:</b> £{project.contract.size}
         </div>
         <h3>Employees:</h3>
-        <section className="container row justify-content-center">
+        <section className="d-flex flex-row flex-wrap justify-content-center">
           {employeeTokens}
         </section>
       </div>
