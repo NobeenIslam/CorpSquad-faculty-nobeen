@@ -9,8 +9,8 @@ export function EmployeeTokenForPage({
   employee,
 }: EmployeeTokenForPageProps): JSX.Element {
   return (
-    <div className="employeeTokenForPage">
-      <img src={employee.avatar} alt="" />
+    <div className="d-flex flex-column align-items-center mx-5 mt-4">
+      <img className="custom-size" src={employee.avatar} alt="" />
       <h2>Name: {employee.name}</h2>
       <h3>Role: {employee.role}</h3>
     </div>

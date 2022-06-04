@@ -6,7 +6,11 @@ export function NavBar(): JSX.Element {
       <div className="container-fluid">
         <ul className="navbar-nav">
           <li className="nav-item">
-            <Link to="/">Back to Dashboard</Link>
+            <Link to="/">
+              <button className="btn btn-link text-light">
+                Back to Dashboard
+              </button>
+            </Link>
           </li>
         </ul>
         <div className="navbar-brand navbar-right">Corpfolio</div>

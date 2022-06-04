@@ -7,11 +7,11 @@ interface EmployeeTokenProps {
 
 export function EmployeeToken({ employee }: EmployeeTokenProps): JSX.Element {
   return (
-    <div className="employeeToken">
+    <div className="d-flex flex-column mx-4 align-items-center">
       <Link to={`/employees/${employee.id}`}>
         <img src={employee.avatar} alt="" />
       </Link>
-      <p>{employee.name}</p>
+      <p className="text-center">{employee.name}</p>
     </div>
   );
 }

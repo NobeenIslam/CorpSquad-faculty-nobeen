@@ -1,143 +1,3 @@
-/* NavBar classes and flexContainers */
-.navBar{
-    background-color: aliceblue;
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-}
-
-.navBar>.homeLink{
-    margin-left: 5px;
-}
-
-.navBar>.logo{
-    font-size: xx-large;
-    margin-left:auto;
-    margin-right: 5px;
-}
-/* Centering all in main content */
-.mainContent{
-    display: flex;
-    flex-direction: column;
-}
-
-.mainContent>h2{
-    margin:50px auto;
-}
-
-.mainContent> .title{
-    margin: auto;
-    margin-bottom: 5px;
-}
-
-/*For filter Controls*/
-.mainContent>.resetButton{
-    width:90%;
-    margin: 20px auto;
-
-}
-.mainContent>.filterControls{
-    display: flex;
-    flex-direction: row;
-    margin-bottom: 10px;
-}
-
-.mainContent>.filterControls>.flexColumnContainer{
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    width: 15%;
-    margin:auto
-}
-/* DashBoard classes and flexContainers */
-/*Note that dashboard is a child of mainContent also, Excluded for brevity*/
-.dashboard{
-    display:flex;
-    flex-direction: column;
-    background-color: lightblue;
-    padding: 5%;
-    margin: 0 5%;
-}
-
-.dashboard > .projectCard{
-    display:flex;
-    flex-direction:column;
-    background-color:  beige;
-    border-color: black;
-    padding: 1%;
-    margin: 10px;
-    border-style:solid;
-    width: 100%
-}
-
-.dashboard> .projectCard> h2{
-    margin: 5px auto;
-}
-.dashboard> .projectCard > div {
-    margin: auto
-}
-
-.dashboard> .projectCard > .employeeTokensContainer{
-    margin: 10px;
-    display:flex;
-    flex-wrap: wrap;
-    justify-content: center;
-}
-
-.dashboard> .projectCard > .employeeTokensContainer > .employeeToken{
-    display:flex;
-    flex-direction: column;
-    margin: 5px;
-    align-items: center;
-    justify-content: center;
-    flex-wrap: wrap;
-}
-/*For Clients profile*/
-.clientEmployeesContainer{
-    display:flex;
-    flex-direction: column;
-    flex-wrap:wrap;
-    justify-content: center;
-    margin: 0 5%;
-
-
-}
-
-.clientEmployeesContainer > h2{
-    margin: 5px auto;
-
-}
-
-.clientEmployeesContainer > .clientEmployeesTokens{
-    margin: 10px;
-    display:flex;
-    flex-direction:row;
-    justify-content: center;
-    flex-wrap: wrap;
-    background-color: blanchedalmond;
-
-}
-
-.clientEmployeesContainer > .clientEmployeesTokens > .employeeToken{
-    display:flex;
-    flex-direction: column;
-    margin: 5px;
-    align-items: center;
-    justify-content: center;
-}
-
-/*For Employee Profile*/
-.mainContent> .employeeTokenForPage{
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    align-self: center; /*When flexing the image it would supersize strangely*/
-}
-
-.mainContent> .employeeTokenForPage>img{
-    width: 50%;
-}
 
 /* Misc */
 img{
@@ -148,40 +8,14 @@ img:hover{
  transform: scale(1.1);
 }
 
-.active{
-    color: red;
+.custom-size{
+    height:250px;
+    width: 250px;
 }
+
 
 /* For debugging CSS */
 
-.blue{
-    background-color: blue;
-}
-
 .red{
     background-color: red;
-}
-
-.purple{
-    background-color: purple;
-}
-
-.yellow{
-    background-color: yellow;
-}
-
-.pink{
-    background-color: pink;
-}
-
-.orange{
-    background-color: orange;
-}
-
-.violet{
-    background-color: violet;
-}
-
-.green{
-    background-color: green;
 }

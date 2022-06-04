@@ -219,7 +219,10 @@ export function Dashboard({
           dashboardState={dashboardState}
           dashboardDispatch={dashboardDispatch}
         />
-        <section className="dashboard">{projectCards}</section>
+        <p className="text-center mb-0">
+          <i>(Click on a picture to go to an Employee Profile)</i>
+        </p>
+        <section className="d-flex flex-column mx-5 ">{projectCards}</section>
       </main>
     </>
   );

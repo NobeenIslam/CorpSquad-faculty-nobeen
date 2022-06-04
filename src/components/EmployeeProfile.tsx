@@ -28,13 +28,15 @@ export function EmployeeProfile({
   );
 
   return (
-    <main className="mainContent">
+    <main className="d-flex flex-column justify-content-center">
       {thisEmployee !== undefined ? (
         <EmployeeTokenForPage employee={thisEmployee} />
       ) : (
         <div>Employee Not Found</div>
       )}
-      <section className="dashboard">{thisEmployeesProjectsCards}</section>
+      <section className="d-flex flex-column mx-5">
+        {thisEmployeesProjectsCards}
+      </section>
     </main>
   );
 }
