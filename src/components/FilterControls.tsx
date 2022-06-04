@@ -34,14 +34,14 @@ export function FilterControls({
         </button>
       </div>
 
-      <section className="row align-items-center">
+      <section className="row align-items-center mx-5">
         <div className="col-xl-3 col-lg-6 justify-content-center mb-2">
           <ClientEmployeeDropdown
             dashboardState={dashboardState}
             dashboardDispatch={dashboardDispatch}
           />
         </div>
-        <div className="col-xl-3 col-lg-6  justify-content-center mb-2">
+        <div className="col-xl-3 col-lg-6  justify-content-center mb-2 ">
           <DateSortButtons
             dashboardState={dashboardState}
             dashboardDispatch={dashboardDispatch}
