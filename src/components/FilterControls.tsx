@@ -53,7 +53,7 @@ export function FilterControls({
             dashboardDispatch={dashboardDispatch}
           />
         </div>
-        <div className="col-xl-3 col-lg-6  justify-content-center">
+        <div className="col-xl-3 col-lg-6  justify-content-center mb-2">
           <RevenueFilters
             dashboardState={dashboardState}
             dashboardDispatch={dashboardDispatch}
