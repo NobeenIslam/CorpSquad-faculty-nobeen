@@ -31,13 +31,19 @@ export function ClientProfile({
   );
 
   return (
-    <main className="mainContent">
-      <h1 className="title">Client: {thisClientsName}</h1>
-      <section className="dashboard">{thisClientsProjectCards}</section>
-      <section className="clientEmployeesContainer">
-        <h2>All Employees affiliated with {thisClientsName}:</h2>
-        <div className="clientEmployeesTokens">{thisClientsEmployeeTokens}</div>
+    <main className="container col justify-content-center mt-4">
+      <h1 className="text-center">Client: {thisClientsName}</h1>
+      <section className="d-flex flex-column mx-5">
+        {thisClientsProjectCards}
       </section>
+      <div className="card mx-5">
+        <h2 className="card-header text-center mt-2 mb-4">
+          All Employees affiliated with {thisClientsName}:
+        </h2>
+        <section className="d-flex flex-row flex-wrap justify-content-center ">
+          {thisClientsEmployeeTokens}
+        </section>
+      </div>
     </main>
   );
 }
