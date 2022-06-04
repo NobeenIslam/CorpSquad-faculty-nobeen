@@ -7,7 +7,9 @@ export function NavBar(): JSX.Element {
         <ul className="navbar-nav">
           <li className="nav-item">
             <Link to="/">
-              <a className="text-light">Back to Dashboard</a>
+              <button className="btn btn-link text-light">
+                Back to Dashboard
+              </button>
             </Link>
           </li>
         </ul>
