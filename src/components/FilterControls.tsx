@@ -34,7 +34,7 @@ export function FilterControls({
         </button>
       </div>
 
-      <section className="row align-items-center mx-5">
+      <section className="row align-items-center mb-2 mx-5">
         <div className="col-xl-3 col-lg-6 justify-content-center mb-2">
           <ClientEmployeeDropdown
             dashboardState={dashboardState}
